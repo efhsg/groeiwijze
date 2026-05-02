@@ -1,11 +1,11 @@
 ---
-allowed-tools: Bash(find:*), Bash(ls:*), Bash(wc:*), Bash(grep:*), Bash(head:*), Bash(cat:*), Bash(xargs:*), Bash(basename:*), Read, Glob
+allowed-tools: Bash(find:*), Bash(ls:*), Bash(wc:*), Bash(grep:*), Bash(head:*), Bash(cat:*), Bash(xargs:*), Bash(basename:*), Read, Glob, Write, Edit
 description: Genereer of update .claude/codebase_analysis.md met overzicht van projectstructuur
 ---
 
 # Codebase Analysis
 
-Genereer een verse `codebase_analysis.md` op basis van de huidige werkelijkheid van de website.
+Volg het skill contract in `skills/analyze-codebase.md`.
 
 ## Project Discovery
 
@@ -48,39 +48,6 @@ Genereer een verse `codebase_analysis.md` op basis van de huidige werkelijkheid 
 !`ls -1 .ai/prompts/*.md 2>/dev/null | xargs -I {} basename {}`
 
 ---
-
-## Analysis Instructions
-
-Genereer een nieuwe `codebase_analysis.md` met:
-
-### 1. Project Overview
-- Type: statische HTML/CSS/JS site met PHP contactformulier
-- Doelgroep en toon
-- Stack details uit het discovery-resultaat
-
-### 2. Tech stack tabel
-Met daadwerkelijke versies/packages waar zichtbaar.
-
-### 3. Bestandsstructuur boom
-Op basis van `find` output, gegroepeerd per directory.
-
-### 4. Pagina-flow diagram
-ASCII-diagram met alle gedetecteerde pagina's en hun verbindingen (navigatie).
-
-### 5. Design system
-- Lijst alle gevonden color tokens
-- Lijst alle gevonden spacing tokens
-- Breakpoints (uit CSS)
-- Font families (uit CSS)
-
-### 6. Contactformulier backend
-- Anti-spam beschermingen die zichtbaar zijn in PHP
-- Externe afhankelijkheden (PHPMailer, etc.)
-
-### 7. Wat hier NIET is
-- Database, framework, build system, etc.
-
-Schrijf het resultaat naar `.claude/codebase_analysis.md` (overschrijft bestaande).
 
 ## Task
 

@@ -14,9 +14,9 @@ Statische marketing-website voor een therapie- en coachingpraktijk in Lansingerl
 | CSS | CSS3 met custom properties (design tokens), BEM naamgeving, mobile-first |
 | JS | Vanilla ES6, minimaal (alleen mobiele nav toggle) |
 | Fonts | Google Fonts — Libre Franklin (400/500/600/700) |
-| Backend | PHP 8+ — alleen contactformulier (PHPMailer via Composer) |
+| Backend | PHP 8.2+ in Docker, PHP 8+ op hosting — alleen contactformulier (PHPMailer via Composer) |
 | Server | Nginx (Docker) of Apache (hosting) |
-| Dev | browser-sync + Tailscale via `dev-reload.sh` |
+| Dev | browser-sync + Tailscale via `dev-reload.sh` voor statische preview; Docker voor PHP |
 
 ## Bestandsstructuur
 
@@ -39,8 +39,13 @@ website/                    # Site root — dit wordt gedeployed
 ├── js/main.js              # Minimale JS (mobile nav toggle)
 └── assets/img/             # Afbeeldingen en favicon
 
+.ai/features/               # Feature specs, plannen en todos
 .ai/prompts/                # Herbruikbare AI-prompts
+└── roles/                  # Rolprompt-fragmenten
 .claude/                    # AI-harnassing — zie .claude/config/project.md voor substructuur
+.claude/plans/              # Ad-hoc analyse-outputs
+.claude/settings.json       # Gedeelde Claude Code permissies
+.claude/settings.local.json # Lokale overrides, gitignored
 docker/                     # Docker config (Nginx, PHP-FPM, Supervisor)
 private/                    # SMTP credentials (buiten document root, gitignored)
 logs/                       # Lokale runtime logs (gitignored)
@@ -65,7 +70,7 @@ Alles staat in één stylesheet. Structuur:
 2. **Reset & base** — body, box-sizing, links
 3. **Typography** — Libre Franklin, clamp() sizing
 4. **Layout** — container (max 1100px), narrow container (max 720px)
-5. **Components** — header, hero, buttons, cards, sections, footer, forms
+5. **Components** — skip-link, header, hero, buttons, cards, sections, footer, forms
 6. **Page-specific** — overrides per pagina
 7. **Responsive** — breakpoints: 480px, 768px, 769px, 1024px
 
@@ -82,6 +87,9 @@ Alles staat in één stylesheet. Structuur:
 | `--color-bg-warm` | `#F8F6F2` | Warme achtergrond |
 | `--color-bg-soft` | `#F4F2EE` | Zachte achtergrond |
 | `--color-border` | `#E8E6E2` | Borders |
+| `--color-border-strong` | `#DCD9D3` | Sterkere neutrale border |
+| `--color-error` | `#C53030` | Formulierfouten |
+| `--color-error-bg` | `#FFF5F5` | Achtergrond bij formulierfouten |
 
 ## Contactformulier (contact-submit.php)
 
@@ -91,7 +99,7 @@ Anti-spam bescherming:
 - IP rate limiting (max 5/uur)
 - Input sanitization
 
-Backend: PHPMailer via Composer. Credentials in `private/contact-mail.config.php` (buiten document root).
+Backend: PHPMailer via Composer. `website/contact-submit.php` laadt `../vendor/autoload.php`; Docker installeert dit via `docker/groeiwijze/composer.json`. Credentials staan runtime in `private/contact-mail.config.php` buiten document root. Lokale niet-runtime secrets kunnen in `private/config/` staan.
 
 ## Pagina-flow
 

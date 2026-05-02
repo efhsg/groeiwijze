@@ -5,7 +5,7 @@ description: Uitgebreide UI/UX en toegankelijkheidsreview van de website vanuit 
 
 # Website Review
 
-Voer een uitgebreide visuele, UX en toegankelijkheidsreview uit van groeiwijze.nl.
+Volg het skill contract in `skills/website-review.md`.
 
 Volg de review-instructies in `.ai/prompts/website-review-agent-prompt.md`.
 

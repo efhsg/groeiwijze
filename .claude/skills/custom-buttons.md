@@ -32,7 +32,7 @@ Geen verbeterpunten — doorgaan / Aanpassen?
 | Aantal opties | 2-4 |
 | Max lengte per optie | 80 tekens |
 | Context-prefix | Tekst vóór `—` / `–` wordt gestript |
-| Trailing `?` | Optioneel, wordt gestript |
+| Trailing `?` | Verplicht bij slash-syntax; renderer stript het teken |
 
 ## Alternatieve syntax: bracket-letter
 
@@ -42,14 +42,14 @@ Geen verbeterpunten — doorgaan / Aanpassen?
 [E] Handmatig bewerken
 ```
 
-Gebruik bij meer dan 4 opties of als letter-codes nodig zijn.
+Gebruik bij 5 opties of als letter-codes nodig zijn.
 
 ### Regels bracket-syntax
 
 | Regel | Detail |
 |-------|--------|
 | Patroon | `[X] Beschrijving` (hoofdletter) |
-| Aantal opties | 2-5 |
+| Aantal opties | 5, of 2-5 als letter-codes functioneel nodig zijn |
 | Max lengte beschrijving | 40 tekens |
 | Positie | Opeenvolgende regels aan eind response |
 

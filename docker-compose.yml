@@ -8,7 +8,6 @@ services:
       - "8001:80"
     volumes:
       - ./website:/var/www/html:ro
-      - ./docker/groeiwijze/php-config:/var/www/private:ro
     environment:
       - SMTP_HOST=${SMTP_HOST:-mail.groeiwijze.nl}
       - SMTP_PORT=${SMTP_PORT:-587}

@@ -30,8 +30,11 @@ Elke pagina volgt dezelfde structuur:
   <!-- meta tags, title, fonts, stylesheet -->
 </head>
 <body>
+  <a class="skip-link" href="#main">Direct naar inhoud</a>
   <header class="header">...</header>
-  <!-- content sections -->
+  <main id="main">
+    <!-- content sections -->
+  </main>
   <footer class="footer">...</footer>
   <script src="js/main.js"></script>
 </body>
@@ -40,7 +43,8 @@ Elke pagina volgt dezelfde structuur:
 
 - `lang="nl"` altijd op `<html>`
 - Consistent meta tags blok (charset, viewport, description)
-- Semantische HTML5 elementen (`<header>`, `<section>`, `<footer>`, `<nav>`)
+- Semantische HTML5 elementen (`<header>`, `<main>`, `<section>`, `<footer>`, `<nav>`)
+- Skip-to-content link vóór de header met target `#main`
 - Stylesheet met versie query parameter (`css/style.css?v=N`) — verhoog `N` bij een CSS-wijziging om browsercaches te omzeilen
 
 ## Responsive
@@ -70,6 +74,16 @@ Elke pagina volgt dezelfde structuur:
 - **Container**: max-width `1100px`, gecentreerd
 - **Narrow container**: max-width `720px` (voor tekst-zware pagina's)
 - Gebruik `padding` via spacing scale variabelen
+
+## Bestaande componentblokken
+
+Herbruik bestaande blokken voordat je nieuwe componentnamen introduceert:
+
+- Navigatie en frame: `.header`, `.logo`, `.nav`, `.nav-toggle`, `.footer`
+- Layout en secties: `.container`, `.section`, `.hero`, `.profile`
+- Contentpatronen: `.card`, `.feature-list`, `.quote-list`, `.phases`, `.read-more`, `.pricing-table`
+- Formulieren: `.form`
+- Utilities: `.lead`, `.text-center`, `.text-muted`, `.mt-*`, `.mb-*`, `.sr-only`
 
 ## Afbeeldingen
 

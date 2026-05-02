@@ -19,10 +19,10 @@
 | Optimize Skill | Skill-bestand structureel reviewen en optimaliseren | `skills/optimize-skill.md` |
 | Evaluate Skill | Semantische evaluatie van een skill (read-only, advies) | `skills/evaluate-skill.md` |
 | Validate Spec | Lichtgewicht checklist-validatie van een feature-spec | `skills/validate-spec.md` |
-| Audit Config | Auditeer Claude-configuratiebestanden op gaps | `commands/audit-config.md` (command-only) |
-| Check Standards | Pre-flight check op gestaged bestanden | `commands/check-standards.md` (command-only) |
-| Website Review | UI/UX en toegankelijkheidsreview | `commands/website-review.md` (command-only) |
-| Analyze Codebase | Regenereer `codebase_analysis.md` | `commands/analyze-codebase.md` (command-only) |
+| Audit Config | Auditeer Claude-configuratiebestanden op gaps | `skills/audit-config.md` |
+| Check Standards | Pre-flight check op gestaged bestanden | `skills/check-standards.md` |
+| Website Review | UI/UX en toegankelijkheidsreview | `skills/website-review.md` |
+| Analyze Codebase | Regenereer `codebase_analysis.md` | `skills/analyze-codebase.md` |
 
 ### Workflow
 
@@ -33,8 +33,8 @@
 | New Branch | Nieuwe feature- of fix-branch aanmaken | `skills/new-branch.md` |
 | New Spec | Lichtgewicht feature-spec genereren onder `.ai/features/{naam}/` | `skills/new-spec.md` |
 | Refactor | Structurele verbeteringen zonder gedragswijziging | `skills/refactor.md` |
-| Refactor Plan | Refactor analyseren en plannen (geen wijzigingen) | `commands/refactor-plan.md` (command-only) |
-| Commit Push | Staged changes committen en pushen naar origin | `commands/commit-push.md` (command-only) |
+| Refactor Plan | Refactor analyseren en plannen (geen wijzigingen) | `skills/refactor-plan.md` |
+| Commit Push | Staged changes committen en pushen naar origin | `skills/commit-push.md` |
 | Onboarding | Snelle start — project overview, key files, commands | `skills/onboarding.md` |
 | Custom Buttons | Slash-syntax en bracket-syntax voor klikbare keuzes | `skills/custom-buttons.md` |
 

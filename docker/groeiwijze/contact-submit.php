@@ -39,15 +39,16 @@ function showError(string $message): void
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body>
+    <a class="skip-link" href="#main">Direct naar inhoud</a>
     <header class="header">
         <div class="container">
             <div class="header__inner">
                 <a href="index.html" class="logo">
                     <svg class="logo__icon" viewBox="0 0 70 76" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0 76V23C0 10.297 10.297 0 23 0h26c11.598 0 21 9.402 21 21v55H56V23c0-4.97-4.03-9-9-9H24c-5.523 0-10 4.477-10 10v52H0Z" fill="#8DA382"/>
+                        <path d="M0 76V23C0 10.297 10.297 0 23 0h26c11.598 0 21 9.402 21 21v55H56V23c0-4.97-4.03-9-9-9H24c-5.523 0-10 4.477-10 10v52H0Z" fill="currentColor"/>
                     </svg>
                     <div class="logo__text">
                         <span class="logo__name">groeiwijze</span>
@@ -58,6 +59,7 @@ function showError(string $message): void
         </div>
     </header>
 
+    <main id="main">
     <section class="section">
         <div class="container container--narrow text-center">
             <h1>Er ging iets mis</h1>
@@ -67,6 +69,8 @@ function showError(string $message): void
             </p>
         </div>
     </section>
+
+    </main>
 
     <footer class="footer">
         <div class="container">

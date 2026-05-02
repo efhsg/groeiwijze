@@ -20,6 +20,9 @@
 
 /* Border/Utility */
 --color-border: #E8E6E2;       /* Subtle border color */
+--color-border-strong: #DCD9D3;/* Stronger neutral border */
+--color-error: #C53030;        /* Form validation error */
+--color-error-bg: #FFF5F5;     /* Form validation error background */
 ```
 
 ## Regels
@@ -28,7 +31,8 @@
 2. **Gebruik CSS custom properties** — Verwijs via `var(--color-name)`, niet via hex-waarden
 3. **Geen kleurmodificaties** — Gebruik geen `opacity`, `rgba()`, of filters om nieuwe kleuren te maken zonder goedkeuring
 4. **Uitzondering voor wit/transparantie** — `#FFFFFF`, `white`, `transparent`, en `rgba(255,255,255,X)` zijn toegestaan voor functionele doeleinden
-5. **Schaduwen** — Gebruik neutrale grijstinten zoals `rgba(62, 68, 68, 0.X)` gebaseerd op `--color-text`
+5. **Schaduwen en overlays** — Gebruik neutrale grijstinten zoals `rgba(62, 68, 68, 0.X)` gebaseerd op `--color-text`; documenteer andere `rgba()`-waarden als token als ze functioneel nodig zijn
+6. **Formulierfouten** — Gebruik `--color-error` en `--color-error-bg`, nooit losse rode hex-waarden
 
 ## Nieuwe kleur toevoegen
 
