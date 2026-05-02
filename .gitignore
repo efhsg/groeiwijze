@@ -1,0 +1,28 @@
+# Environment and credentials
+.env
+config.txt
+private/
+
+# Docker
+docker/groeiwijze/php-config/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Backups
+*.bak
+*.zip
+*.tar.gz
+backups/
+
+# Logs
+*.log
+logs/

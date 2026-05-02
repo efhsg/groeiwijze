@@ -1,0 +1,18 @@
+<svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Ring 1 (buiten) -->
+  <path d="M30 75 C30 40 60 12 100 12 C140 12 170 40 170 75" stroke="#8DA382" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+  <path d="M30 75 C30 110 60 138 100 138 C140 138 170 110 170 75" stroke="#8DA382" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+  <!-- Ring 2 -->
+  <path d="M44 75 C44 48 66 24 100 24 C134 24 156 48 156 75" stroke="#8DA382" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.7"/>
+  <path d="M44 75 C44 102 66 126 100 126 C134 126 156 102 156 75" stroke="#8DA382" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.7"/>
+  <!-- Ring 3 -->
+  <path d="M58 75 C58 54 76 36 100 36 C124 36 142 54 142 75" stroke="#8DA382" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.45"/>
+  <path d="M58 75 C58 96 76 114 100 114 C124 114 142 96 142 75" stroke="#8DA382" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.45"/>
+  <!-- Ring 4 (binnen) -->
+  <path d="M72 75 C72 62 84 48 100 48 C116 48 128 62 128 75" stroke="#8DA382" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.25"/>
+  <path d="M72 75 C72 88 84 102 100 102 C116 102 128 88 128 75" stroke="#8DA382" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.25"/>
+  <!-- Witte band -->
+  <rect x="20" y="60" width="160" height="30" fill="white"/>
+  <!-- Tekst -->
+  <text x="100" y="81" text-anchor="middle" font-family="'Libre Franklin', sans-serif" font-size="20" font-weight="600" letter-spacing="-0.3" fill="#6B8560">Groeiwijze</text>
+</svg>

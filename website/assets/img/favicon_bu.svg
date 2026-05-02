@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" fill="none">
+<path d="M30 75 C30 40 60 12 100 12 C140 12 170 40 170 75" fill="none" stroke="#8DA382" stroke-linecap="round" stroke-width="4.5"></path>
+<path d="M48 75 C48 50 70 28 100 28 C130 28 152 50 152 75" fill="none" opacity="0.6" stroke="#8DA382" stroke-linecap="round" stroke-width="4"></path>
+<path d="M65 75 C65 58 80 42 100 42 C120 42 135 58 135 75" fill="none" opacity="0.3" stroke="#8DA382" stroke-linecap="round" stroke-width="3"></path>
+<path d="M30 75 C30 110 60 138 100 138 C140 138 170 110 170 75" fill="none" stroke="#8DA382" stroke-linecap="round" stroke-width="4.5"></path>
+<path d="M48 75 C48 100 70 122 100 122 C130 122 152 100 152 75" fill="none" opacity="0.6" stroke="#8DA382" stroke-linecap="round" stroke-width="4"></path>
+<path d="M65 75 C65 92 80 108 100 108 C120 108 135 92 135 75" fill="none" opacity="0.3" stroke="#8DA382" stroke-linecap="round" stroke-width="3"></path>
+<rect fill="white" height="22" width="160" x="20" y="64"></rect>
+<text fill="#3E4444" font-family="'Libre Franklin', sans-serif" font-size="20" font-weight="600" text-anchor="middle" x="100" y="81">groeiwijze</text>
+</svg>

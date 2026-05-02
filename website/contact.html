@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact - Groeiwijze</title>
+    <meta
+      name="description"
+      content="Neem contact op met Groeiwijze in Lansingerland. Maak een afspraak voor een vrijblijvend kennismakingsgesprek."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/style.css?v=4" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header__inner">
+          <a href="index.html" class="logo">
+            <img src="assets/img/logo2.svg" alt="" class="logo__icon" />
+            <span class="logo__tagline">praktijk voor herstel en groei</span>
+            <span class="sr-only">groeiwijze</span>
+          </a>
+
+          <div class="nav-wrap">
+            <button
+              class="nav-toggle"
+              aria-label="Menu"
+              aria-expanded="false"
+              aria-controls="main-nav"
+            >
+              <span class="nav-toggle__bar"></span>
+              <span class="nav-toggle__bar"></span>
+              <span class="nav-toggle__bar"></span>
+            </button>
+            <nav class="nav" id="main-nav" aria-label="Hoofdnavigatie">
+              <a href="index.html" class="nav__link">Home</a>
+              <a href="over-mij.html" class="nav__link">Over mij</a>
+              <a href="visie.html" class="nav__link">Mijn visie</a>
+              <a href="werkwijze.html" class="nav__link">Werkwijze</a>
+              <a href="aanbod.html" class="nav__link">Aanbod</a>
+              <a href="herstelroute.html" class="nav__link">Herstelroute</a>
+              <a href="tarieven.html" class="nav__link">Tarieven</a>
+              <a href="veelgestelde-vragen.html" class="nav__link"
+                >Veelgestelde vragen</a
+              >
+              <a
+                href="contact.html"
+                class="nav__link nav__link--active"
+                aria-current="page"
+                >Contact</a
+              >
+              <a href="verwijzers.html" class="nav__link">Voor verwijzers</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <section class="section section--warm">
+      <div class="container container--narrow">
+        <h1>Neem contact op</h1>
+        <p class="lead mt-md">
+          Heb je een vraag of wil je een afspraak maken? Ik hoor graag van je.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container container--narrow">
+        <h2>Stuur me een bericht</h2>
+
+        <form
+          action="contact-submit.php"
+          method="POST"
+          class="mt-md"
+          id="contact-form"
+        >
+          <!-- Honeypot field - hidden from humans, catches bots -->
+          <div class="form__group form__group--hp" aria-hidden="true">
+            <label for="website" class="form__label">Website</label>
+            <input
+              type="text"
+              id="website"
+              name="website"
+              class="form__input"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
+
+          <!-- Anti-spam: timestamp when form was loaded -->
+          <input
+            type="hidden"
+            name="form_started_at"
+            id="form_started_at"
+            value=""
+          />
+
+          <div class="form__group">
+            <label for="name" class="form__label">Naam *</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form__input"
+              autocomplete="name"
+              required
+              aria-required="true"
+              aria-describedby="name-error"
+            />
+            <span id="name-error" class="form__error" role="alert"></span>
+          </div>
+
+          <div class="form__group">
+            <label for="email" class="form__label">E-mailadres *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form__input"
+              autocomplete="email"
+              required
+              aria-required="true"
+              aria-describedby="email-error"
+            />
+            <span id="email-error" class="form__error" role="alert"></span>
+          </div>
+
+          <div class="form__group">
+            <label for="phone" class="form__label">Telefoonnummer</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              class="form__input"
+              autocomplete="tel"
+            />
+          </div>
+
+          <div class="form__group">
+            <label for="message" class="form__label">Bericht</label>
+            <textarea
+              id="message"
+              name="message"
+              class="form__textarea"
+              rows="5"
+            ></textarea>
+          </div>
+
+          <p class="text-muted" style="font-size: 0.85rem">
+            Je gegevens worden alleen gebruikt om contact met je te kunnen
+            opnemen. Zie <a href="privacy.html">privacyverklaring</a>.
+          </p>
+
+          <p class="text-muted mt-sm" style="font-size: 0.85rem">
+            Na verzenden neem ik binnen 2 werkdagen contact op.
+          </p>
+
+          <button type="submit" class="btn btn--primary mt-md">
+            Verstuur bericht
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <section class="section section--soft">
+      <div class="container container--narrow">
+        <h2>Praktijkinformatie</h2>
+
+        <div class="card-grid mt-md">
+          <div class="card">
+            <h3 class="card__title">Locatie</h3>
+            <p class="card__text">
+              De praktijk is gevestigd in Lansingerland, in een fijne ruimte aan
+              huis.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 class="card__title">Openingstijden</h3>
+            <p class="card__text">
+              Dinsdag t/m donderdag<br />
+              9:30 – 16:00 uur<br />
+              Incidenteel vrijdagochtend
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 class="card__title">Beschikbaarheid</h3>
+            <p class="card__text">
+              Neem contact op voor actuele beschikbaarheid. Na de intake hoef je
+              niet opnieuw te wachten en kunnen we direct starten.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 class="card__title">Direct contact</h3>
+            <p class="card__text">
+              <a href="mailto:info@groeiwijze.nl">info@groeiwijze.nl</a><br />
+              <a href="tel:+31600000000">06 - 00 00 00 00</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__inner">
+          <div>
+            <h4 class="footer__title">Groeiwijze</h4>
+            <p class="footer__text">
+              Praktijk voor herstel en groei<br />
+              Lansingerland
+            </p>
+          </div>
+          <div>
+            <h4 class="footer__title">Openingstijden</h4>
+            <p class="footer__text">
+              Dinsdag t/m donderdag<br />
+              9:30 – 16:00 uur
+            </p>
+          </div>
+          <div>
+            <h4 class="footer__title">Contact</h4>
+            <p class="footer__text">
+              <a href="mailto:info@groeiwijze.nl" class="footer__link"
+                >info@groeiwijze.nl</a
+              ><br />
+              <a href="tel:+31600000000" class="footer__link"
+                >06 - 00 00 00 00</a
+              >
+            </p>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <p>
+            &copy; 2025 Groeiwijze ·
+            <a href="privacy.html" class="footer__link">Privacy</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+      // Set form timestamp on page load for anti-spam
+      (function () {
+        var field = document.getElementById("form_started_at");
+        if (field) {
+          field.value = Math.floor(Date.now() / 1000);
+        }
+      })();
+
+      // Form validation
+      (function () {
+        var form = document.getElementById("contact-form");
+        if (!form) return;
+
+        var nameInput = document.getElementById("name");
+        var emailInput = document.getElementById("email");
+        var nameError = document.getElementById("name-error");
+        var emailError = document.getElementById("email-error");
+
+        function setError(input, errorEl, message) {
+          input.classList.add("form__input--error");
+          errorEl.textContent = message;
+          errorEl.classList.add("form__error--visible");
+        }
+
+        function clearError(input, errorEl) {
+          input.classList.remove("form__input--error");
+          errorEl.textContent = "";
+          errorEl.classList.remove("form__error--visible");
+        }
+
+        function validateEmail(email) {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        // Clear errors on input
+        nameInput.addEventListener("input", function () {
+          if (this.value.trim()) {
+            clearError(this, nameError);
+          }
+        });
+
+        emailInput.addEventListener("input", function () {
+          if (validateEmail(this.value.trim())) {
+            clearError(this, emailError);
+          }
+        });
+
+        // Validate on submit
+        form.addEventListener("submit", function (e) {
+          var isValid = true;
+          var name = nameInput.value.trim();
+          var email = emailInput.value.trim();
+
+          // Clear previous errors
+          clearError(nameInput, nameError);
+          clearError(emailInput, emailError);
+
+          // Validate name
+          if (!name) {
+            setError(nameInput, nameError, "Vul je naam in.");
+            isValid = false;
+          }
+
+          // Validate email
+          if (!email) {
+            setError(emailInput, emailError, "Vul je e-mailadres in.");
+            isValid = false;
+          } else if (!validateEmail(email)) {
+            setError(emailInput, emailError, "Vul een geldig e-mailadres in.");
+            isValid = false;
+          }
+
+          if (!isValid) {
+            e.preventDefault();
+            // Focus first invalid field
+            var firstError = form.querySelector(".form__input--error");
+            if (firstError) {
+              firstError.focus();
+            }
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+# Credentials and secrets
+.env
+config.txt
+private/
+
+# Backups and archives
+*.zip
+*.tar
+*.tar.gz
+*.bak
+backups/
+
+# Git
+.git/
+.gitignore
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation
+*.md
+!README.md
+
+# Old versions and previews
+preview-*.html
+website/v0.1/
+website/v0.2/
+
+# Logs
+*.log
+logs/
