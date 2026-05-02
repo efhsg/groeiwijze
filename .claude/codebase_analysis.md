@@ -40,11 +40,22 @@ website/                    # Site root — dit wordt gedeployed
 └── assets/img/             # Afbeeldingen en favicon
 
 .ai/prompts/                # Herbruikbare AI-prompts
-.claude/                    # AI-harnassing
+.claude/                    # AI-harnassing — zie .claude/config/project.md voor substructuur
 docker/                     # Docker config (Nginx, PHP-FPM, Supervisor)
-private/                    # SMTP credentials (buiten document root)
-_archive/                   # Oude design-iteraties
+private/                    # SMTP credentials (buiten document root, gitignored)
+logs/                       # Lokale runtime logs (gitignored)
+_archive/                   # Oude design-iteraties (preview-*.html, logo's, oude docs)
 ```
+
+## Root-utilities
+
+| Bestand | Doel |
+|---------|------|
+| `dev-reload.sh` | Live-reload dev server (browser-sync + Tailscale) — zie `.claude/design/live-reload-setup.md` |
+| `start-sites.sh` | Start Docker container, optioneel Tailscale serve |
+| `add_aanbod.py` | One-off Python script voor aanbod-content (handmatige tooling) |
+| `docker-compose.yml` | Docker setup (Nginx + PHP-FPM) |
+| `config.txt` | Lokale SFTP/SMTP credentials — **gitignored, nooit committen** |
 
 ## Design system (style.css)
 

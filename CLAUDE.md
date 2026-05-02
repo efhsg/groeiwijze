@@ -33,7 +33,7 @@ Gedetailleerde regels staan in `.claude/rules/`:
 | `accessibility.md` | WCAG 2.1 AA minimale eisen |
 | `security.md` | PHP contactformulier, input validatie, credentials |
 | `skill-routing.md` | Automatisch de juiste skill laden op bestandspatroon of onderwerp |
-| `workflow.md` | Commits, design directory, todos.md checklist |
+| `workflow.md` | Commit conventies, todos.md checklist, review checklist |
 | `response-format.md` | Gesloten vragen als klikbare buttons (custom-buttons syntax) |
 | `writing-standards.md` | Documentatie schrijfstijl voor rules en skills |
 
@@ -62,3 +62,5 @@ Sluit code-wijzigingen af met:
 Gewijzigd: [bestanden]
 Gecheckt: [kleuren / BEM / responsive / a11y / content toon]
 ```
+
+Eindigt de response met een gesloten vraag? Dan staat het `Gewijzigd:`/`Gecheckt:`-blok ervóór — de keuze-regel blijft altijd de laatste regel (zie `rules/response-format.md`).

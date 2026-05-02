@@ -31,7 +31,19 @@ website/                            # Website root
     └── img/                        # Afbeeldingen en favicon
 ```
 
-Root directory bevat preview-iteraties (`_archive/preview-*.html`) en logo-varianten in SVG.
+Root directory bevat preview-iteraties (`_archive/preview-*.html`) en logo-varianten in SVG. Zie `.claude/codebase_analysis.md` voor root-utilities (`dev-reload.sh`, `start-sites.sh` etc.).
+
+## .claude/ structuur
+
+| Pad | Doel |
+|-----|------|
+| `.claude/rules/` | Gezaghebbende rules (zie `CLAUDE.md`) |
+| `.claude/skills/` | Skill-contracten + `index.md` (registry) |
+| `.claude/commands/` | Slash-command wrappers — verwijzen naar skill-contracten |
+| `.claude/templates/` | Templates voor genereer-skills (bv. `feature-spec.md` voor `/new-spec`) |
+| `.claude/design/` | Algemene design-documenten (geen feature) |
+| `.claude/plans/` | Ad-hoc analyse-outputs (geen vaste structuur) |
+| `.claude/codebase_analysis.md` | Snel oriëntatiepunt voor nieuwe sessies |
 
 ## Development Server
 
