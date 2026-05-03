@@ -6,6 +6,17 @@
 2. Scan `.claude/skills/index.md` voor een relevante skill
 3. Bekijk bestaande code en patronen voordat je wijzigt
 
+## Eén wijziging tegelijk — VERPLICHT
+
+Voer per beurt maximaal één inhoudelijke wijziging door, of bespreek maximaal
+één inhoudelijke wijziging met de gebruiker.
+
+Als een taak meerdere wijzigingen lijkt te vragen, splits de taak op. Bespreek
+elke wijziging apart met de gebruiker voordat je doorgaat naar de volgende.
+
+Bundel geen tekst-, structuur-, stijl-, content-, gedrag- of configuratiewijzigingen
+in één beurt, tenzij de gebruiker die specifieke bundel expliciet goedkeurt.
+
 ## Feature directory
 
 Voor complexe features, gebruik een feature directory:
