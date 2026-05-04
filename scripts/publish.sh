@@ -101,8 +101,13 @@ META_PATH="${META_DIR}/${TARGET_ID}.json"
 
 install -d -m 0700 "$META_DIR"
 
-# remote_root is absoluut vanuit het SFTP-chroot perspectief
-REMOTE_ROOT="/${PUBLISH_REMOTE_BASE}/${PUBLISH_REMOTE_DOCROOT}"
+# REMOTE_ROOT moet absoluut zijn (runner-contract preflight eist leading '/').
+# mijn.host is NIET chrooted: SFTP landt in /home/${PUBLISH_USER}/ en
+# PUBLISH_REMOTE_BASE is daar relatief aan. Vandaar de home-prefix.
+# Voor andere hosters met afwijkende home-conventie: pas deze regel aan
+# (bv. /srv/${PUBLISH_USER}/ of een PUBLISH_REMOTE_HOME env-var introduceren).
+REMOTE_HOME="/home/${PUBLISH_USER}"
+REMOTE_ROOT="${REMOTE_HOME}/${PUBLISH_REMOTE_BASE}/${PUBLISH_REMOTE_DOCROOT}"
 REMOTE_PARENT="$(dirname "$REMOTE_ROOT")"
 
 # ──────────────────────────────────────────────────────────────────
@@ -206,8 +211,10 @@ chmod 0600 "${PRIVATE_BUILD}/contact-mail.config.php"
 # ──────────────────────────────────────────────────────────────────
 # 9. Upload via lftp (drie mirror-calls met dezelfde SSH-config)
 #
-# DirectAdmin per-domein layout (mijn.host SFTP-chroot, "/" = SSH-home):
-#   /domains/groeiwijze.nl/
+# DirectAdmin per-domein layout (mijn.host, GEEN chroot — SSH landt in
+# /home/${PUBLISH_USER}/, paden onder PUBLISH_REMOTE_BASE zijn relatief
+# aan die home en moeten naar absoluut worden geprefixt):
+#   /home/${PUBLISH_USER}/domains/groeiwijze.nl/
 #   ├── public_html/   ← website-mirror (= REMOTE_ROOT)
 #   ├── vendor/        ← PHPMailer (sibling)
 #   ├── private/       ← contact-mail.config.php (sibling)
