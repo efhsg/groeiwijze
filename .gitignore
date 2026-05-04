@@ -3,8 +3,18 @@
 config.txt
 private/
 
+# Publish (AI-runner publish-contract)
+# .publish/ bevat per-target SSH-keys + metadata + known_hosts.
+# De dir krijgt bij install ook een eigen .gitignore met '*' — dit is de
+# tweede laag voor het geval die ontbreekt.
+.publish/
+# .build/ is de staging-dir die scripts/publish.sh aanmaakt voor PHPMailer
+# vendor/ en de gegenereerde private/contact-mail.config.php.
+.build/
+
 # Docker
 docker/groeiwijze/php-config/
+docker/groeiwijze/vendor/
 
 # OS files
 .DS_Store
