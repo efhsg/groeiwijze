@@ -25,6 +25,7 @@ Thumbs.db
 *.zip
 *.tar.gz
 backups/
+_archive/
 
 # Logs
 *.log
