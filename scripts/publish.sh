@@ -241,13 +241,10 @@ run_lftp_mirror() {
     " || { echo "lftp mirror failed: ${local_dir} → ${remote_dir}" >&2; exit 66; }
 }
 
-# Defensieve excludes voor de website-mirror:
-#   - cgi-bin/    : door DirectAdmin auto-aangemaakt en -beheerd; --delete zou hem
-#                   verwijderen, met kortstondige downtime tot DA hem hermaakt.
-#   - v0.x/       : historische snapshot/rollback-dirs op de remote
-#                   (v0.1, v0.2, v0.3, etc.). Niet in git, dus mirror zou ze weghalen.
-#                   Cleanup van die dirs hoort handmatig via SFTP, niet via deploy.
-WEBSITE_EXCLUDES="--exclude '^cgi-bin/' --exclude '^v[0-9]+\\.[0-9]+/'"
+# Defensieve exclude voor cgi-bin/: door DirectAdmin auto-aangemaakt en
+# -beheerd; --delete zou hem verwijderen, met kortstondige downtime tot DA
+# hem hermaakt.
+WEBSITE_EXCLUDES="--exclude '^cgi-bin/'"
 
 echo "→ mirror website/ → ${REMOTE_ROOT}/"
 run_lftp_mirror "${PROJECT_DIR}/website" "${REMOTE_ROOT}" "${WEBSITE_EXCLUDES}"
