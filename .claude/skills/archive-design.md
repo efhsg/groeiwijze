@@ -47,14 +47,10 @@ Presenteer als genummerde lijst en vraag welke gearchiveerd moet worden.
 
 ```bash
 mkdir -p .ai/features/.archive
-git mv ".ai/features/{naam}" ".ai/features/.archive/{naam}"
-```
-
-Als git mv mislukt (niet in git repository of niet getrackt):
-
-```bash
 mv ".ai/features/{naam}" ".ai/features/.archive/{naam}"
 ```
+
+`.ai/features/.archive/` staat in `.gitignore` — de archive is lokaal geheugen, geen versioned artefact. Eerder getrackte bestanden in de bronpad zijn na de move tracked-but-missing; stage die deletes met `git add -u .ai/features/{naam}` om bij de volgende commit op te nemen.
 
 ### 4. Rapporteer
 

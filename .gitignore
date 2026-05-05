@@ -37,6 +37,9 @@ Thumbs.db
 backups/
 _archive/
 
+# Feature-directory archives — lokaal geheugen, niet in git
+.ai/features/.archive/
+
 # Logs
 *.log
 logs/
