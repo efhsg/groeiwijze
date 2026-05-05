@@ -13,7 +13,7 @@ services:
       - SMTP_PORT=${SMTP_PORT:-587}
       - SMTP_USER=${SMTP_USER}
       - SMTP_PASS=${SMTP_PASS}
-      - SMTP_SECURE=${SMTP_SECURE:-tls}
+      - SMTP_SECURE=${SMTP_SECURE:-}
       - SMTP_SKIP_VERIFY=${SMTP_SKIP_VERIFY:-false}
       - MAIL_FROM=${MAIL_FROM}
       - MAIL_FROM_NAME=${MAIL_FROM_NAME:-Groeiwijze}
@@ -21,14 +21,13 @@ services:
       - RATE_LIMIT_SALT=${RATE_LIMIT_SALT:-groeiwijze_ratelimit_2024}
     restart: unless-stopped
 
-  # dev-only — niet bedoeld voor productie (zie .ai/features/dev-mailcatcher/spec.md).
-  # Productie draait geen Docker; dit compose-bestand wordt op de hosting niet uitgevoerd.
+  # dev-only — niet bedoeld voor productie. Productie draait geen Docker;
+  # dit compose-bestand wordt op de hosting niet uitgevoerd.
+  # Plaintext SMTP is bewust: de container-to-container loopback binnen het
+  # compose-netwerk heeft geen man-in-the-middle om tegen te beschermen.
   mailcatcher:
     image: axllent/mailpit:latest
     container_name: groeiwijze_mailcatcher
-    depends_on:
-      mailcatcher_certgen:
-        condition: service_completed_successfully
     ports:
       # Web-UI alleen op localhost; Tailscale-Serve publiceert extern op 8444.
       - "127.0.0.1:8025:8025"
@@ -36,36 +35,6 @@ services:
       # geen host-publicatie zodat geen extern proces direct mail kan posten.
     environment:
       - MP_SMTP_AUTH_ACCEPT_ANY=true
+      - MP_SMTP_AUTH_ALLOW_INSECURE=true
       - MP_MAX_MESSAGES=500
-      - MP_SMTP_TLS_CERT=/certs/cert.pem
-      - MP_SMTP_TLS_KEY=/certs/key.pem
-    volumes:
-      - mailcatcher_certs:/certs:ro
     restart: unless-stopped
-
-  # dev-only — eenmalige init die self-signed STARTTLS-cert genereert in named
-  # volume. Mailpit heeft geen auto-cert (geverifieerd via `mailpit --help`);
-  # we leveren cert+key zelf aan. Idempotent: schrijft alleen als cert nog
-  # niet bestaat. Cert is dev-only, 10 jaar geldig, CN=mailcatcher.
-  mailcatcher_certgen:
-    image: alpine:3.20
-    container_name: groeiwijze_mailcatcher_certgen
-    command:
-      - /bin/sh
-      - -c
-      - |
-        set -e
-        if [ ! -f /certs/cert.pem ]; then
-          apk add --no-cache openssl >/dev/null
-          openssl req -x509 -newkey rsa:2048 -nodes \
-            -keyout /certs/key.pem -out /certs/cert.pem \
-            -days 3650 -subj "/CN=mailcatcher" \
-            -addext "subjectAltName=DNS:mailcatcher,DNS:localhost"
-          chmod 644 /certs/cert.pem /certs/key.pem
-        fi
-    volumes:
-      - mailcatcher_certs:/certs
-    restart: "no"
-
-volumes:
-  mailcatcher_certs:

@@ -19,7 +19,7 @@ return [
     'smtp_port'        => ${SMTP_PORT:-587},
     'smtp_user'        => '${SMTP_USER}',
     'smtp_pass'        => '${SMTP_PASS}',
-    'smtp_secure'      => '${SMTP_SECURE:-tls}',
+    'smtp_secure'      => '${SMTP_SECURE-}',
     'smtp_skip_verify' => ${SMTP_SKIP_VERIFY:-false},
 
     // Mail Settings
