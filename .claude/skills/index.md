@@ -24,6 +24,12 @@
 | Website Review | UI/UX en toegankelijkheidsreview | `skills/website-review.md` |
 | Analyze Codebase | Regenereer `codebase_analysis.md` | `skills/analyze-codebase.md` |
 
+### Deployment
+
+| Skill | Beschrijving | Contract |
+|-------|-------------|----------|
+| Publish | Veilige wrapper rond `./scripts/publish.sh` — dry-run default, live met confirmation | `skills/publish.md` |
+
 ### Workflow
 
 | Skill | Beschrijving | Contract |
@@ -54,6 +60,12 @@
 | `/refactor` | Structurele code-verbeteringen |
 | `/refactor-plan` | Plan een refactor (analyse zonder wijzigingen) |
 | `/onboarding` | Project quick start |
+
+### Deployment
+
+| Command | Doel |
+|---------|------|
+| `/publish` | Site naar mijn.host pushen (dry-run default; `live` voor echte deploy) |
 
 ### Validatie & analyse
 
@@ -93,6 +105,7 @@
 | skill verbeteren, skill review, skill check | Optimize Skill |
 | skill semantisch beoordelen, skill diepgang | Evaluate Skill |
 | codebase overzicht regenereren | Analyze Codebase |
+| publish, deploy, naar mijn.host pushen, live zetten, --dry-run, --live | Publish |
 
 ## Bestandspatroon routing
 
