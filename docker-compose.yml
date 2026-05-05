@@ -8,17 +8,14 @@ services:
       - "8001:80"
     volumes:
       - ./website:/var/www/html:ro
-    environment:
-      - SMTP_HOST=${SMTP_HOST:-mail.groeiwijze.nl}
-      - SMTP_PORT=${SMTP_PORT:-587}
-      - SMTP_USER=${SMTP_USER}
-      - SMTP_PASS=${SMTP_PASS}
-      - SMTP_SECURE=${SMTP_SECURE:-}
-      - SMTP_SKIP_VERIFY=${SMTP_SKIP_VERIFY:-false}
-      - MAIL_FROM=${MAIL_FROM}
-      - MAIL_FROM_NAME=${MAIL_FROM_NAME:-Groeiwijze}
-      - MAIL_TO=${MAIL_TO}
-      - RATE_LIMIT_SALT=${RATE_LIMIT_SALT:-groeiwijze_ratelimit_2024}
+    # .env = productie-defaults (baseline), .env.dev = dev-overrides (later wint).
+    # .env.dev is verplicht: zonder dit bestand faalt `docker compose up` direct
+    # — fail-closed gedrag dat voorkomt dat dev per ongeluk met productie-SMTP
+    # draait. Voor productie-deploy via mijn.host wordt deze compose-file niet
+    # gebruikt; daar pusht scripts/publish.sh een gegenereerde mail-config.
+    env_file:
+      - .env
+      - .env.dev
     restart: unless-stopped
 
   # dev-only — niet bedoeld voor productie. Productie draait geen Docker;

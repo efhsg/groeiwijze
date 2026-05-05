@@ -1,6 +1,24 @@
 #!/bin/sh
 # Generate PHP config from environment variables
 
+# Dev-mode guard. Deze container draait alleen in dev. Weiger te starten
+# als APP_ENV niet 'dev' is (override-bestand .env.dev ontbreekt of is leeg)
+# of als SMTP_HOST naar een externe host wijst. Voorkomt dat het dev-
+# contactformulier via een echte SMTP-server mailt.
+if [ "${APP_ENV:-}" != "dev" ]; then
+    echo "DEV-GUARD: APP_ENV='${APP_ENV:-unset}' is niet 'dev'." >&2
+    echo "Deze container draait alleen in dev. Zorg dat .env.dev geladen wordt." >&2
+    exit 1
+fi
+
+case "${SMTP_HOST:-}" in
+    mailcatcher|localhost|127.0.0.1|*.local) ;;
+    *)
+        echo "DEV-GUARD: SMTP_HOST='${SMTP_HOST:-unset}' is geen mailcatcher-doel." >&2
+        echo "Toegestaan in dev: mailcatcher, localhost, 127.0.0.1, *.local." >&2
+        exit 1 ;;
+esac
+
 CONFIG_DIR="/var/www/private"
 CONFIG_FILE="$CONFIG_DIR/contact-mail.config.php"
 

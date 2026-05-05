@@ -198,6 +198,35 @@ rm -rf "$VENDOR_BUILD"
 cp -R "${COMPOSER_DIR}/vendor" "$VENDOR_BUILD"
 
 # ──────────────────────────────────────────────────────────────────
+# 7b. Veiligheidsklep: weiger dev-waarden te publiceren
+#
+# Als .env per ongeluk nog op de mailcatcher-defaults staat
+# (SMTP_HOST=mailcatcher, MAIL_TO=*.local, SMTP_USER=mailpit etc.), zou
+# contact-mail.config.php met dev-config naar productie worden gepusht.
+# Dat breekt het live formulier. Hier hard stoppen voordat de file
+# gegenereerd of gemirrord is.
+# ──────────────────────────────────────────────────────────────────
+
+case "${SMTP_HOST}" in
+    mailcatcher|localhost|127.0.0.1|*.local)
+        echo "PUBLISH GEWEIGERD: SMTP_HOST='${SMTP_HOST}' lijkt een dev-waarde." >&2
+        echo "Vul productie-SMTP in .env in voordat je publiceert." >&2
+        exit 65 ;;
+esac
+
+case "${MAIL_TO}" in
+    *.local|dev-*)
+        echo "PUBLISH GEWEIGERD: MAIL_TO='${MAIL_TO}' lijkt een dev-waarde." >&2
+        exit 65 ;;
+esac
+
+case "${SMTP_USER}" in
+    mailpit)
+        echo "PUBLISH GEWEIGERD: SMTP_USER='mailpit' is een dev-waarde." >&2
+        exit 65 ;;
+esac
+
+# ──────────────────────────────────────────────────────────────────
 # 8. Genereer private/contact-mail.config.php uit env (mode 0600 lokaal)
 # ──────────────────────────────────────────────────────────────────
 

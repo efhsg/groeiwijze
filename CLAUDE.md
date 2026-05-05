@@ -23,7 +23,7 @@ Statische marketing-website (HTML5, CSS3, vanilla JS) met PHP form handler. Geen
 
 ## Dev mailcatcher
 
-De dev-stack draait een Mailpit-sidecar die alle uitgaande mail van de dev-site opvangt. Form-submits in de dev-omgeving raken daardoor nooit productie-mailboxen. Zie `.ai/features/dev-mailcatcher/spec.md` voor de volledige specificatie.
+De dev-stack draait een Mailpit-sidecar die alle uitgaande mail van de dev-site opvangt. De mail-configuratie volgt een baseline-overlay-model: `.env` bevat productiewaarden, `.env.dev` overschrijft die met mailcatcher-instellingen voor dev. Form-submits in de dev-omgeving raken daardoor nooit productie-mailboxen.
 
 **Inbox bekijken (zonder terminal):**
 
@@ -43,9 +43,16 @@ Adviezen voor testen:
 - Verstuur testen vanaf een Tailscale- of VPN-IP, niet vanaf een herleidbaar publiek IP.
 - Behandel een nieuw lid op het Tailscale-netwerk als een nieuwe lezer van alle gevangen mail.
 
-**Productie blijft gescheiden:**
+**Hoe productie en dev gescheiden blijven:**
 
-Productie draait geen Docker en gebruikt geen `.env`. De mail-config staat in `private/contact-mail.config.php` op de mijn.host-server en wijst naar de echte SMTP-host. De mailcatcher-service in `docker-compose.yml` is dev-only en bereikt productie nooit.
+Productie draait geen Docker. `private/contact-mail.config.php` op de mijn.host-server wordt elke `/publish` opnieuw gegenereerd uit `.env` en gemirrord naar de host. `.env.dev` is dev-only — `scripts/publish.sh` leest dat bestand niet.
+
+Vier lagen voorkomen kruisbesmetting:
+
+1. **Compose-laadvolgorde:** `docker-compose.yml` leest `.env` (productie-defaults) en daarná `.env.dev` (dev-overrides). Ontbreekt `.env.dev`, dan faalt `docker compose up` direct.
+2. **Container-guard:** `docker/groeiwijze/generate-config.sh` weigert te starten als `APP_ENV` niet `dev` is, of als `SMTP_HOST` geen mailcatcher-doel is.
+3. **Publish-guard:** `scripts/publish.sh` weigert te publiceren als `SMTP_HOST`, `MAIL_TO` of `SMTP_USER` herkenbaar dev-vorm hebben (`mailcatcher`, `*.local`, `mailpit`, enzovoort).
+4. **Mailcatcher-isolatie:** SMTP-poort 1025 is alleen binnen het compose-netwerk bereikbaar; geen extern proces kan rechtstreeks mail posten.
 
 ## Rules
 
