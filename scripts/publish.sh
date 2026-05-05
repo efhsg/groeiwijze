@@ -145,6 +145,16 @@ chmod 0600 "$META_PATH"
 # 6. Preflight via runner-contract
 # ──────────────────────────────────────────────────────────────────
 
+# Voor non-22 ports hasht ssh-keyscan -H de bracketed vorm [host]:port,
+# niet de bare hostname. De runner-contract preflight HMAC't over
+# context.host — dus die moet exact dezelfde string zijn die ssh-keyscan
+# heeft gehasht, anders faalt host-trust matching.
+if [[ "$PUBLISH_PORT" == "22" ]]; then
+    HOST_TRUST="$PUBLISH_HOST"
+else
+    HOST_TRUST="[${PUBLISH_HOST}]:${PUBLISH_PORT}"
+fi
+
 CTX=$(mktemp -t publish-ctx.XXXXXX.json)
 trap 'rm -f "$CTX"' EXIT
 
@@ -156,7 +166,7 @@ cat > "$CTX" <<EOF
   "runner_role": "${AI_RUNNER_ROLE}",
   "mode": "${MODE}",
   "remote_root": "${REMOTE_ROOT}",
-  "host": "${PUBLISH_HOST}",
+  "host": "${HOST_TRUST}",
   "port": ${PUBLISH_PORT}
 }
 EOF
@@ -221,7 +231,7 @@ chmod 0600 "${PRIVATE_BUILD}/contact-mail.config.php"
 #   ├── private_html/, public_ftp/, logs/, stats/  ← DirectAdmin-managed, niet aanraken
 # ──────────────────────────────────────────────────────────────────
 
-SSH_CMD="ssh -i ${KEY_PATH} -o UserKnownHostsFile=${KH_PATH} -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -p ${PUBLISH_PORT}"
+SSH_CMD="ssh -F /dev/null -i ${KEY_PATH} -o UserKnownHostsFile=${KH_PATH} -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -p ${PUBLISH_PORT}"
 
 # lftp mirror flags. --reverse = lokaal naar remote (push). --delete = mirror semantiek.
 LFTP_MIRROR_OPTS="--reverse --delete --verbose"
@@ -254,8 +264,12 @@ run_lftp_mirror "${VENDOR_BUILD}" "${REMOTE_PARENT}/vendor"
 
 # Voor private/ probeert lftp lokale 0600 te behouden — werkt op de meeste
 # SFTP-servers, ook mijn.host's DirectAdmin-setup.
+# ratelimit/ is runtime state (per-IP submit-counters voor het contactformulier)
+# en moet deploys overleven; anders krijgt elke spammer z'n quota terug bij elke
+# release.
+PRIVATE_EXCLUDES="--exclude '^ratelimit/'"
 echo "→ mirror private/ → ${REMOTE_PARENT}/private/ (mode 0600 source)"
-run_lftp_mirror "${PRIVATE_BUILD}" "${REMOTE_PARENT}/private"
+run_lftp_mirror "${PRIVATE_BUILD}" "${REMOTE_PARENT}/private" "${PRIVATE_EXCLUDES}"
 
 if [[ "$MODE" == "dry-run" ]]; then
     echo "✓ dry-run complete (no remote writes performed)"
