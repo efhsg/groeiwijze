@@ -12,4 +12,15 @@
 - [x] Run linter + fix issues (php -l, bash -n, yaml-parse)
 - [x] Run unit tests + fix failures (n.v.t. — geen test framework)
 - [x] DoD check
-- [ ] Commit
+- [x] Commit (2f55fa0)
+
+## Bugfix B1 — STARTTLS-cert (2026-05-05)
+
+- [x] Runtime-validatie AC-mailcatcher2 op dev-host (faalde initieel: 502 op STARTTLS)
+- [x] `docker-compose.yml` — `mailcatcher_certgen`-init-service toegevoegd (alpine + openssl, idempotent)
+- [x] `docker-compose.yml` — `mailcatcher` koppelt cert-volume + zet `MP_SMTP_TLS_CERT`/`MP_SMTP_TLS_KEY` + `depends_on`
+- [x] `docker-compose.yml` — top-level `volumes:`-sectie voor `mailcatcher_certs`
+- [x] `.env` — dev-defaults hersteld (`SMTP_SECURE=tls`, `SMTP_SKIP_VERIFY=true`)
+- [x] Verificatie: form-submit → HTTP 303, Mailpit-API toont 2 mails (admin + visitor)
+- [x] `insights.md` — B1-fix gedocumenteerd
+- [ ] Commit B1-bugfix
