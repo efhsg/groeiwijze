@@ -122,10 +122,22 @@ function createMailer(array $config): PHPMailer
     $mailer->SMTPAuth = true;
     $mailer->Username = $config['smtp_user'];
     $mailer->Password = $config['smtp_pass'];
-    $mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mailer->SMTPSecure = $config['smtp_secure'] ?? PHPMailer::ENCRYPTION_STARTTLS;
     $mailer->Port = $config['smtp_port'];
     $mailer->CharSet = 'UTF-8';
     $mailer->setFrom($config['mail_from'], $config['mail_from_name']);
+
+    // Dev-only: accepteer self-signed certs (bv. Mailpit auto-generated cert).
+    // Productie zet smtp_skip_verify op false zodat strict cert-verificatie geldt.
+    if (!empty($config['smtp_skip_verify'])) {
+        $mailer->SMTPOptions = [
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true,
+            ],
+        ];
+    }
 
     return $mailer;
 }

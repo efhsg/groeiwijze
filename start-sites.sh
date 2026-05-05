@@ -36,16 +36,21 @@ if command -v tailscale &> /dev/null; then
     echo ""
     HOSTNAME=$(tailscale status --json | jq -r '.Self.DNSName' | sed 's/\.$//')
 
-    echo "Tailscale serve command (run manually to enable HTTPS):"
+    echo "Tailscale serve commands (run manually to enable HTTPS):"
     echo "  tailscale serve --bg --https=8443 http://localhost:8001"
+    echo "  tailscale serve --bg --https=8444 http://localhost:8025"
     echo ""
-    echo "HTTPS access: https://$HOSTNAME:8443"
+    echo "HTTPS access:"
+    echo "  Site:           https://$HOSTNAME:8443"
+    echo "  Mailcatcher UI: https://$HOSTNAME:8444"
 fi
 
 echo ""
 echo "=== Site is now running ==="
 echo ""
-echo "Local access: http://localhost:8001"
+echo "Local access:"
+echo "  Site:           http://localhost:8001"
+echo "  Mailcatcher UI: http://localhost:8025"
 echo ""
 echo "To stop: docker compose down"
 echo "To view logs: docker compose logs -f"

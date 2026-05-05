@@ -21,6 +21,32 @@ Statische marketing-website (HTML5, CSS3, vanilla JS) met PHP form handler. Geen
 **Doelgroep:** Stress-sensitieve mensen die therapie/coaching zoeken
 **Toon:** Warm, nuchter, niet-medisch — geen diagnoses, geen claims, geen agressieve conversie
 
+## Dev mailcatcher
+
+De dev-stack draait een Mailpit-sidecar die alle uitgaande mail van de dev-site opvangt. Form-submits in de dev-omgeving raken daardoor nooit productie-mailboxen. Zie `.ai/features/dev-mailcatcher/spec.md` voor de volledige specificatie.
+
+**Inbox bekijken (zonder terminal):**
+
+1. Start de dev-stack via `bash start-sites.sh` of `docker compose up -d`.
+2. Open in een browser:
+   - Lokaal op de dev-host: `http://localhost:8025`
+   - Vanaf een ander Tailscale-apparaat: `https://<tailscale-naam>:8444` (na `tailscale serve`-commando uit `start-sites.sh`).
+3. Klik op een mail in de lijst om afzender, ontvanger, onderwerp, body en headers te bekijken.
+
+**Tailscale-waarschuwing — PII:**
+
+De inbox kent geen aparte authenticatie. Iedereen met toegang tot het Tailscale-netwerk leest alle gevangen mail mee, inclusief volledige mail-headers (Message-ID, Received-pad). De mailbody bevat bovendien het IP-adres van de afzender. Toelating tot Tailscale staat daarmee gelijk aan leestoegang tot de inbox.
+
+Adviezen voor testen:
+
+- Gebruik fictieve testdata — geen echte namen, e-mailadressen of berichten van klanten.
+- Verstuur testen vanaf een Tailscale- of VPN-IP, niet vanaf een herleidbaar publiek IP.
+- Behandel een nieuw lid op het Tailscale-netwerk als een nieuwe lezer van alle gevangen mail.
+
+**Productie blijft gescheiden:**
+
+Productie draait geen Docker en gebruikt geen `.env`. De mail-config staat in `private/contact-mail.config.php` op de mijn.host-server en wijst naar de echte SMTP-host. De mailcatcher-service in `docker-compose.yml` is dev-only en bereikt productie nooit.
+
 ## Rules
 
 Gedetailleerde regels staan in `.claude/rules/`:

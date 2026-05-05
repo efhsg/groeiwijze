@@ -13,8 +13,26 @@ services:
       - SMTP_PORT=${SMTP_PORT:-587}
       - SMTP_USER=${SMTP_USER}
       - SMTP_PASS=${SMTP_PASS}
+      - SMTP_SECURE=${SMTP_SECURE:-tls}
+      - SMTP_SKIP_VERIFY=${SMTP_SKIP_VERIFY:-false}
       - MAIL_FROM=${MAIL_FROM}
       - MAIL_FROM_NAME=${MAIL_FROM_NAME:-Groeiwijze}
       - MAIL_TO=${MAIL_TO}
       - RATE_LIMIT_SALT=${RATE_LIMIT_SALT:-groeiwijze_ratelimit_2024}
+    restart: unless-stopped
+
+  # dev-only — niet bedoeld voor productie (zie .ai/features/dev-mailcatcher/spec.md).
+  # Productie draait geen Docker; dit compose-bestand wordt op de hosting niet uitgevoerd.
+  mailcatcher:
+    image: axllent/mailpit:latest
+    container_name: groeiwijze_mailcatcher
+    ports:
+      # Web-UI alleen op localhost; Tailscale-Serve publiceert extern op 8444.
+      - "127.0.0.1:8025:8025"
+      # SMTP-poort 1025 alleen intern bereikbaar binnen het compose-netwerk —
+      # geen host-publicatie zodat geen extern proces direct mail kan posten.
+    environment:
+      - MP_SMTP_AUTH_ACCEPT_ANY=true
+      - MP_SMTP_AUTH_ALLOW_INSECURE=true
+      - MP_MAX_MESSAGES=500
     restart: unless-stopped
