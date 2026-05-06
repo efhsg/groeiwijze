@@ -187,6 +187,7 @@ echo "preflight ok (mode=${MODE}, role=${AI_RUNNER_ROLE}, target=${TARGET_ID})"
 # ──────────────────────────────────────────────────────────────────
 
 BUILD_ROOT="${PROJECT_DIR}/.build/${TARGET_ID}"
+WEBSITE_BUILD="${BUILD_ROOT}/website"
 VENDOR_BUILD="${BUILD_ROOT}/vendor"
 PRIVATE_BUILD="${BUILD_ROOT}/private"
 COMPOSER_DIR="${PROJECT_DIR}/docker/groeiwijze"
@@ -196,6 +197,16 @@ echo "→ composer install (PHPMailer)"
 (cd "$COMPOSER_DIR" && composer install --no-dev --no-interaction --no-progress --quiet)
 rm -rf "$VENDOR_BUILD"
 cp -R "${COMPOSER_DIR}/vendor" "$VENDOR_BUILD"
+
+# Stage website/ in .build/ zodat we map- en bestand-rechten kunnen
+# normaliseren vóór upload. Zonder normalisatie spiegelt lftp's mirror de
+# lokale dev-rechten (vaak 0700 op directories door umask van de container)
+# naar de server, waarna de webserver de submappen niet meer kan uitleveren
+# en CSS/JS/assets als 404 verschijnen.
+rm -rf "$WEBSITE_BUILD"
+cp -R "${PROJECT_DIR}/website" "$WEBSITE_BUILD"
+find "$WEBSITE_BUILD" -type d -exec chmod 755 {} +
+find "$WEBSITE_BUILD" -type f -exec chmod 644 {} +
 
 # ──────────────────────────────────────────────────────────────────
 # 7b. Veiligheidsklep: weiger dev-waarden te publiceren
@@ -286,7 +297,7 @@ run_lftp_mirror() {
 WEBSITE_EXCLUDES="--exclude '^cgi-bin/'"
 
 echo "→ mirror website/ → ${REMOTE_ROOT}/"
-run_lftp_mirror "${PROJECT_DIR}/website" "${REMOTE_ROOT}" "${WEBSITE_EXCLUDES}"
+run_lftp_mirror "${WEBSITE_BUILD}" "${REMOTE_ROOT}" "${WEBSITE_EXCLUDES}"
 
 echo "→ mirror vendor/ → ${REMOTE_PARENT}/vendor/"
 run_lftp_mirror "${VENDOR_BUILD}" "${REMOTE_PARENT}/vendor"
