@@ -6,6 +6,8 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
+COMPOSE_ARGS=(-f docker-compose.yml -f docker-compose.dev.yml)
+
 echo "=== Groeiwijze ==="
 echo ""
 
@@ -20,7 +22,7 @@ fi
 
 # Start Docker container
 echo "[1/2] Starting Docker container..."
-docker compose up -d --build
+docker compose "${COMPOSE_ARGS[@]}" up -d --build
 
 # Wait for container to be healthy
 echo "[2/2] Waiting for container to start..."
@@ -29,7 +31,7 @@ sleep 3
 # Check container status
 echo ""
 echo "Container status:"
-docker compose ps
+docker compose "${COMPOSE_ARGS[@]}" ps
 
 # Configure Tailscale serve (if tailscale is available)
 if command -v tailscale &> /dev/null; then
@@ -52,5 +54,5 @@ echo "Local access:"
 echo "  Site:           http://localhost:8001"
 echo "  Mailcatcher UI: http://localhost:8025"
 echo ""
-echo "To stop: docker compose down"
-echo "To view logs: docker compose logs -f"
+echo "To stop: docker compose -f docker-compose.yml -f docker-compose.dev.yml down"
+echo "To view logs: docker compose -f docker-compose.yml -f docker-compose.dev.yml logs -f"

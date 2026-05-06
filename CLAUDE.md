@@ -27,7 +27,7 @@ De dev-stack draait een Mailpit-sidecar die alle uitgaande mail van de dev-site 
 
 **Inbox bekijken (zonder terminal):**
 
-1. Start de dev-stack via `bash start-sites.sh` of `docker compose up -d`.
+1. Start de dev-stack via `bash start-sites.sh` of `docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d`.
 2. Open in een browser:
    - Lokaal op de dev-host: `http://localhost:8025`
    - Vanaf een ander Tailscale-apparaat: `https://<tailscale-naam>:8444` (na `tailscale serve`-commando uit `start-sites.sh`).
@@ -49,7 +49,7 @@ Productie draait geen Docker. `private/contact-mail.config.php` op de mijn.host-
 
 Vier lagen voorkomen kruisbesmetting:
 
-1. **Compose-laadvolgorde:** `docker-compose.yml` leest `.env` (productie-defaults) en daarná `.env.dev` (dev-overrides). Ontbreekt `.env.dev`, dan faalt `docker compose up` direct.
+1. **Compose-laadvolgorde:** `docker-compose.yml` leest `.env` (productie-defaults) en daarná `.env.dev` (dev-overrides). `docker-compose.dev.yml` mount dev-only worktree tooling. Ontbreekt `.env.dev`, dan faalt `docker compose -f docker-compose.yml -f docker-compose.dev.yml up` direct.
 2. **Container-guard:** `docker/groeiwijze/generate-config.sh` weigert te starten als `APP_ENV` niet `dev` is, of als `SMTP_HOST` geen mailcatcher-doel is.
 3. **Publish-guard:** `scripts/publish.sh` weigert te publiceren als `SMTP_HOST`, `MAIL_TO` of `SMTP_USER` herkenbaar dev-vorm hebben (`mailcatcher`, `*.local`, `mailpit`, enzovoort).
 4. **Mailcatcher-isolatie:** SMTP-poort 1025 is alleen binnen het compose-netwerk bereikbaar; geen extern proces kan rechtstreeks mail posten.

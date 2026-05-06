@@ -68,7 +68,7 @@ bash dev-reload.sh
 Gebruik Docker wanneer het contactformulier lokaal functioneel getest moet worden.
 
 ```bash
-docker compose up --build
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
 ```
 
 Docker luistert standaard op `http://localhost:8001`. De container genereert `/var/www/private/contact-mail.config.php` uit `.env`-waarden en installeert PHPMailer via `docker/groeiwijze/composer.json`.

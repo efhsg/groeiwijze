@@ -1,0 +1,4 @@
+services:
+  groeiwijze:
+    volumes:
+      - ./docker/groeiwijze/_wt:/var/www/_wt:ro

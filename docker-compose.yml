@@ -7,12 +7,14 @@ services:
     ports:
       - "8001:80"
     volumes:
-      - ./website:/var/www/html:ro
+      - ${PROJECTS_ROOT:-..}:/var/www/projects:ro
     # .env = productie-defaults (baseline), .env.dev = dev-overrides (later wint).
-    # .env.dev is verplicht: zonder dit bestand faalt `docker compose up` direct
-    # — fail-closed gedrag dat voorkomt dat dev per ongeluk met productie-SMTP
-    # draait. Voor productie-deploy via mijn.host wordt deze compose-file niet
-    # gebruikt; daar pusht scripts/publish.sh een gegenereerde mail-config.
+    # .env.dev is verplicht: zonder dit bestand faalt de expliciete dev-compose
+    # flow (`docker compose -f docker-compose.yml -f docker-compose.dev.yml up`)
+    # direct — fail-closed gedrag dat voorkomt dat dev per ongeluk met
+    # productie-SMTP draait. Voor productie-deploy via mijn.host wordt deze
+    # compose-file niet gebruikt; daar pusht scripts/publish.sh een gegenereerde
+    # mail-config.
     env_file:
       - .env
       - .env.dev

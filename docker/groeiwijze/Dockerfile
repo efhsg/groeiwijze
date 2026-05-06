@@ -26,6 +26,9 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # Copy Docker-specific contact form handler
 COPY contact-submit.php /var/www/docker-contact-submit.php
 
+# Copy dev-only worktree tooling placeholders
+COPY _wt /var/www/_wt
+
 # Copy PHP config generator script
 COPY generate-config.sh /docker-entrypoint.d/generate-config.sh
 RUN chmod +x /docker-entrypoint.d/generate-config.sh
