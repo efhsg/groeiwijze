@@ -154,7 +154,7 @@
         var current = readCurrentSuffix();
 
         if (current === '') {
-            setBadge('wt: ' + MAIN_LABEL, null);
+            setBadge(MAIN_LABEL, null);
             setStatus('');
             renderOptions(suffixes, '');
             return;
@@ -169,32 +169,32 @@
         }
 
         if (!SUFFIX_REGEX.test(current)) {
-            setBadge('wt: ' + MAIN_LABEL, 'stale');
+            setBadge(MAIN_LABEL, 'stale');
             setStatus('Ongeldige worktree-suffix in URL — main wordt getoond.');
             renderOptions(suffixes, '');
             return;
         }
 
         if (!available) {
-            setBadge('wt: ' + current + ' (stale)', 'stale');
+            setBadge(current + ' (stale)', 'stale');
             setStatus('Worktree "' + current + '" niet beschikbaar — main wordt getoond.');
             renderOptions(suffixes, '');
             return;
         }
 
-        setBadge('wt: ' + current, null);
+        setBadge(current, null);
         setStatus('');
         renderOptions(suffixes, current);
     }
 
     function applyError() {
-        setBadge('⚠ wt: ?', 'error');
+        setBadge('⚠ ?', 'error');
         setStatus('Kon worktrees niet ophalen — refresh om opnieuw te proberen.');
         list.textContent = '';
     }
 
     function applyLoading() {
-        setBadge('wt: …', null);
+        setBadge('…', null);
         setStatus('Worktrees ophalen…');
     }
 
