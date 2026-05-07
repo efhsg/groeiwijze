@@ -13,6 +13,12 @@ use PHPMailer\PHPMailer\Exception;
 
 define('DEBUG_MODE', false);
 
+const SUFFIX_REGEX = '/^[a-zA-Z0-9_-]{1,100}$/';
+
+define('CONFIG_PATH', dirname($_SERVER['DOCUMENT_ROOT']) . '/private/contact-mail.config.php');
+define('AUTOLOAD_PATH', dirname(__DIR__) . '/vendor/autoload.php');
+define('RATELIMIT_DIR', dirname($_SERVER['DOCUMENT_ROOT']) . '/private/ratelimit');
+
 // ============================================================================
 // HELPER FUNCTIONS
 // ============================================================================
@@ -23,6 +29,7 @@ define('DEBUG_MODE', false);
 function showError(string $message): void
 {
     http_response_code(400);
+    $contactLink = appendWtQuery('contact.html', extractWtSuffix());
     ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -60,7 +67,7 @@ function showError(string $message): void
             <h1>Er ging iets mis</h1>
             <p class="lead mt-md"><?= nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8')) ?></p>
             <p class="mt-lg">
-                <a href="contact.html" class="btn btn--primary">Terug naar contactformulier</a>
+                <a href="<?= htmlspecialchars($contactLink, ENT_QUOTES, 'UTF-8') ?>" class="btn btn--primary">Terug naar contactformulier</a>
             </p>
         </div>
     </section>
@@ -85,8 +92,53 @@ function showError(string $message): void
  */
 function redirectSuccess(): void
 {
-    header('Location: thank-you.html', true, 303);
+    $location = appendWtQuery('thank-you.html', extractWtSuffix());
+    header('Location: ' . $location, true, 303);
     exit;
+}
+
+function extractWtSuffix(): string
+{
+    $candidates = [
+        $_POST['wt'] ?? null,
+        $_GET['wt'] ?? null,
+        extractWtFromReferer(),
+    ];
+
+    foreach ($candidates as $candidate) {
+        if (is_string($candidate) && preg_match(SUFFIX_REGEX, $candidate) === 1) {
+            return $candidate;
+        }
+    }
+
+    return '';
+}
+
+function extractWtFromReferer(): ?string
+{
+    $referer = $_SERVER['HTTP_REFERER'] ?? '';
+    if ($referer === '') {
+        return null;
+    }
+
+    $query = parse_url($referer, PHP_URL_QUERY);
+    if (!is_string($query) || $query === '') {
+        return null;
+    }
+
+    parse_str($query, $params);
+    $wt = $params['wt'] ?? null;
+
+    return is_string($wt) ? $wt : null;
+}
+
+function appendWtQuery(string $url, string $wtSuffix): string
+{
+    if ($wtSuffix === '') {
+        return $url;
+    }
+
+    return $url . '?wt=' . urlencode($wtSuffix);
 }
 
 function sanitizeInput(string $input, int $maxLength): string
@@ -117,7 +169,7 @@ function createMailer(array $config): PHPMailer
     $mailer->SMTPAuth = true;
     $mailer->Username = $config['smtp_user'];
     $mailer->Password = $config['smtp_pass'];
-    $mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mailer->SMTPSecure = $config['smtp_secure'] ?? PHPMailer::ENCRYPTION_STARTTLS;
     $mailer->Port = $config['smtp_port'];
     $mailer->CharSet = 'UTF-8';
     $mailer->setFrom($config['mail_from'], $config['mail_from_name']);
@@ -135,19 +187,17 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die('Method Not Allowed');
 }
 
-$configPath = dirname($_SERVER['DOCUMENT_ROOT']) . '/private/contact-mail.config.php';
-if (!file_exists($configPath)) {
-    error_log('Groeiwijze contact: Config file not found at: ' . $configPath);
-    showError(DEBUG_MODE ? 'Config file not found at: ' . $configPath : 'Er is een technische fout opgetreden. Probeer het later opnieuw.');
+if (!file_exists(CONFIG_PATH)) {
+    error_log('Groeiwijze contact: Config file not found at: ' . CONFIG_PATH);
+    showError(DEBUG_MODE ? 'Config file not found at: ' . CONFIG_PATH : 'Er is een technische fout opgetreden. Probeer het later opnieuw.');
 }
-$config = require $configPath;
+$config = require CONFIG_PATH;
 
-$autoloadPath = dirname(__DIR__) . '/vendor/autoload.php';
-if (!file_exists($autoloadPath)) {
-    error_log('Groeiwijze contact: Composer autoload not found at: ' . $autoloadPath);
-    showError(DEBUG_MODE ? 'Composer autoload not found at: ' . $autoloadPath : 'Er is een technische fout opgetreden. Probeer het later opnieuw.');
+if (!file_exists(AUTOLOAD_PATH)) {
+    error_log('Groeiwijze contact: Composer autoload not found at: ' . AUTOLOAD_PATH);
+    showError(DEBUG_MODE ? 'Composer autoload not found at: ' . AUTOLOAD_PATH : 'Er is een technische fout opgetreden. Probeer het later opnieuw.');
 }
-require $autoloadPath;
+require AUTOLOAD_PATH;
 
 date_default_timezone_set('Europe/Amsterdam');
 
@@ -167,11 +217,10 @@ if ($formStartedAt <= 0 || ($now - $formStartedAt) < 3)
 $visitorIp = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
 $ipHash = hash('sha256', $visitorIp . ($config['rate_limit_salt'] ?? 'groeiwijze'));
 
-$rateLimitDir = dirname($_SERVER['DOCUMENT_ROOT']) . '/private/ratelimit';
-if (!is_dir($rateLimitDir))
-    @mkdir($rateLimitDir, 0750, true);
+if (!is_dir(RATELIMIT_DIR))
+    @mkdir(RATELIMIT_DIR, 0750, true);
 
-$rateLimitFile = $rateLimitDir . '/' . $ipHash . '.json';
+$rateLimitFile = RATELIMIT_DIR . '/' . $ipHash . '.json';
 $maxSubmissions = 5;
 $timeWindow = 3600;
 
