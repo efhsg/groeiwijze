@@ -162,6 +162,7 @@ cat > "$CTX" <<EOF
 {
   "owner_id": ${OWNER_ID},
   "project_id": "${PROJECT_ID}",
+  "project_path": "${PROJECT_DIR}",
   "target_id": "${TARGET_ID}",
   "runner_role": "${AI_RUNNER_ROLE}",
   "mode": "${MODE}",
@@ -171,7 +172,11 @@ cat > "$CTX" <<EOF
 }
 EOF
 
-YII="/var/www/worktree/main/yii/yii"
+# PromptManager-runner-binary. Default wijst naar de canonieke worktree-checkout
+# op deze host; override via PROMPTMANAGER_YII als de runner elders staat. Dit
+# voorkomt het "/var/www/worktree/main/yii/yii"-anti-pattern dat eerder een
+# stille blokkade veroorzaakte na worktree-rename.
+YII="${PROMPTMANAGER_YII:-/var/www/worktree/promptmanager/yii/yii}"
 PREFLIGHT_OUT=$("$YII" publish-runner/preflight --context="$CTX") || {
     echo "$PREFLIGHT_OUT" >&2
     PAYLOAD=$(printf '%s\n' "$PREFLIGHT_OUT" | grep -E '^\{' | tail -n1)
