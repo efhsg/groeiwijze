@@ -109,6 +109,102 @@
         return url.toString();
     }
 
+    function hasActiveSuffix() {
+        var suffix = readCurrentSuffix();
+        return suffix !== '' && SUFFIX_REGEX.test(suffix);
+    }
+
+    function isSkippableHref(href) {
+        if (!href || href.charAt(0) === '#') {
+            return true;
+        }
+
+        var normalized = href.toLowerCase();
+        return normalized.indexOf('javascript:') === 0
+            || normalized.indexOf('mailto:') === 0
+            || normalized.indexOf('tel:') === 0;
+    }
+
+    function sameOriginUrl(rawUrl) {
+        try {
+            var url = new URL(rawUrl, window.location.href);
+            return url.origin === window.location.origin ? url : null;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    function ensureHiddenWtInput(form, suffix) {
+        var existing = form.querySelector('input[name="' + QUERY_KEY + '"]');
+        if (existing) {
+            return;
+        }
+
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = QUERY_KEY;
+        input.value = suffix;
+        form.appendChild(input);
+    }
+
+    function makeWorktreeSticky() {
+        if (!hasActiveSuffix()) {
+            return;
+        }
+
+        document.addEventListener('click', function (event) {
+            var suffix = readCurrentSuffix();
+            if (suffix === '' || !SUFFIX_REGEX.test(suffix)) {
+                return;
+            }
+
+            var target = event.target;
+            var link = target && target.closest ? target.closest('a[href]') : null;
+            if (!link) {
+                return;
+            }
+
+            var href = link.getAttribute('href');
+            if (isSkippableHref(href)) {
+                return;
+            }
+
+            var url = sameOriginUrl(href);
+            if (!url || url.searchParams.has(QUERY_KEY)) {
+                return;
+            }
+
+            url.searchParams.set(QUERY_KEY, suffix);
+            link.setAttribute('href', url.pathname + url.search + url.hash);
+        }, true);
+
+        document.addEventListener('submit', function (event) {
+            var suffix = readCurrentSuffix();
+            if (suffix === '' || !SUFFIX_REGEX.test(suffix)) {
+                return;
+            }
+
+            var form = event.target;
+            if (!form || form.tagName !== 'FORM') {
+                return;
+            }
+
+            var action = form.getAttribute('action') || window.location.href;
+            var url = sameOriginUrl(action);
+            if (!url || url.searchParams.has(QUERY_KEY)) {
+                return;
+            }
+
+            if ((form.getAttribute('method') || 'get').toLowerCase() === 'get') {
+                ensureHiddenWtInput(form, suffix);
+                return;
+            }
+
+            url.searchParams.set(QUERY_KEY, suffix);
+            form.setAttribute('action', url.pathname + url.search + url.hash);
+        }, true);
+    }
+
     function renderOptions(suffixes, currentSuffix) {
         list.textContent = '';
 
@@ -273,6 +369,8 @@
     });
 
     document.body.appendChild(container);
+
+    makeWorktreeSticky();
 
     applyLoading();
     fetchSuffixes()
