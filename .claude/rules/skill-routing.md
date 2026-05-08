@@ -14,6 +14,7 @@ Laad automatisch de relevante skill op basis van het bestandstype of onderwerp.
 | `.ai/features/**/spec.md` | `skills/validate-spec.md` + `rules/workflow.md` |
 | `.ai/features/**/todos.md` | `rules/workflow.md` (gezaghebbende hervattingschecklist) |
 | `.ai/features/**/*.md` | `rules/workflow.md` (feature directory conventies) |
+| `.ai/prompts/roles/*.md` | `skills/improve-role.md` |
 | `.ai/prompts/**/*.md` | `skills/improve-prompt.md` |
 | `.claude/skills/**/*.md` | `skills/optimize-skill.md` (structureel) of `skills/evaluate-skill.md` (semantisch, read-only) + `rules/writing-standards.md` |
 | `.claude/rules/*.md` | `rules/writing-standards.md` |

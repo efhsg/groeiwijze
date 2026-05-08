@@ -8,6 +8,7 @@
 |-------|-------------|----------|
 | Adaptive Intake Flow | Intake/check flow ontwerp (Groen/Oranje/Rood) | `skills/groeiwijze-adaptive-intake-flow/SKILL.md` |
 | Adaptive Site Structure | Site-structuur keuze (one-pager/multi-page/hybrid) | `skills/groeiwijze-adaptive-site-structure/SKILL.md` |
+| Website UX Coach | UX-expert persona die ADHD-vriendelijk begeleidt bij website-verbeteringen | `skills/website-ux-coach.md` |
 
 ### Validatie & Review
 
@@ -16,6 +17,7 @@
 | Triage Review | Externe code review kritisch beoordelen | `skills/triage-review.md` |
 | Review Changes | Gestructureerde review voor commit (kleuren, BEM, a11y, content, security) | `skills/review-changes.md` |
 | Improve Prompt | Prompt-bestand in `.ai/prompts/` analyseren en verbeteren | `skills/improve-prompt.md` |
+| Improve Role | Rolbestand in `.ai/prompts/roles/` analyseren en verbeteren | `skills/improve-role.md` |
 | Optimize Skill | Skill-bestand structureel reviewen en optimaliseren | `skills/optimize-skill.md` |
 | Evaluate Skill | Semantische evaluatie van een skill (read-only, advies) | `skills/evaluate-skill.md` |
 | Validate Spec | Lichtgewicht checklist-validatie van een feature-spec | `skills/validate-spec.md` |
@@ -43,6 +45,7 @@
 | Commit Push | Staged changes committen en pushen naar origin | `skills/commit-push.md` |
 | Onboarding | Snelle start — project overview, key files, commands | `skills/onboarding.md` |
 | Custom Buttons | Slash-syntax en bracket-syntax voor klikbare keuzes | `skills/custom-buttons.md` |
+| Worktree Workflow | Hoe agents zich gedragen in PromptManager's gebruiker-gestuurde worktree-flow | `skills/worktree-workflow.md` |
 
 ## Beschikbare commands (slash)
 
@@ -67,11 +70,18 @@
 |---------|------|
 | `/publish` | Site naar mijn.host pushen (dry-run default; `live` voor echte deploy) |
 
+### Persona
+
+| Command | Doel |
+|---------|------|
+| `/website-ux-coach` | Activeer Website UX Coach persona voor de sessie |
+
 ### Validatie & analyse
 
 | Command | Doel |
 |---------|------|
 | `/improve-prompt` | Prompt verbeteren |
+| `/improve-role` | Rol verbeteren |
 | `/triage-review` | Externe review beoordelen |
 | `/website-review` | UI/UX en toegankelijkheidsreview |
 | `/audit-config` | Harnassing zelf auditen op gaps |
@@ -92,6 +102,7 @@
 | afronden, commit, checklist, finalize | Finalize Changes |
 | commit, push, naar origin sturen | Commit Push |
 | prompt verbeteren, prompt kwaliteit, .ai/prompts/ | Improve Prompt |
+| rol verbeteren, role persona, .ai/prompts/roles/ | Improve Role |
 | design archiveren, opruimen, voltooide feature | Archive Design |
 | nieuwe branch, feature starten, git branch | New Branch |
 | nieuwe feature-spec, plan, design directory | New Spec |
@@ -106,6 +117,8 @@
 | skill semantisch beoordelen, skill diepgang | Evaluate Skill |
 | codebase overzicht regenereren | Analyze Codebase |
 | publish, deploy, naar mijn.host pushen, live zetten, --dry-run, --live | Publish |
+| UX coach, persona aannemen, ADHD-vriendelijke begeleiding, focus houden, parkeer-notes | Website UX Coach |
+| worktree, sync, merge back, mergeback, branch-flow | Worktree Workflow |
 
 ## Bestandspatroon routing
 

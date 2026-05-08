@@ -6,7 +6,7 @@
 
 **Document:** GEN:{{File}}
 
-GEN:{{Review action}}
+GEN:{{Description}}
 
 ## Proces
 

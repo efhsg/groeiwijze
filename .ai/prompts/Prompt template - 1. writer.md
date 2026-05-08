@@ -83,8 +83,8 @@ Voor elke plek in het ontwerp waar variabele input nodig is, doorloop deze besli
 
 1. **Verandert de waarde per gebruik?** Nee → hardcoden, geen placeholder
 2. **Heeft een bestaande prompt onder `.ai/prompts/` al een placeholder met dezelfde semantische rol?** Ja → gebruik dezelfde naam (consistentie)
-3. **Is de waarde vrije tekst die de gebruiker bij elke run invult?** → `GEN:{{Naam}}`
-4. **Is de waarde een bestandspad?** → `GEN:{{File}}` (of een specifieker label, bv. `GEN:{{Spec file}}`)
+3. **Is de waarde vrije tekst die de gebruiker bij elke run invult?** → `GEN:{{Description}}`
+4. **Is de waarde een bestandspad?** → `GEN:{{File}}`
 5. **Is de waarde een outputtaal?** → `GEN:{{Language}}` onder een aparte `## Taal`-sectie
 
 **Naamgevingsregels** voor placeholders:
@@ -96,7 +96,7 @@ Voor elke plek in het ontwerp waar variabele input nodig is, doorloop deze besli
 | Hergebruik bestaande namen | Zelfde rol → zelfde naam als in andere `.ai/prompts/`-bestanden |
 | Geen impliciete defaults | Als een waarde optioneel is, beschrijf dat expliciet bij de invoersectie |
 
-> Groeiwijze.nl gebruikt alleen `GEN:{{...}}` placeholders. Er is geen project- of systeemscope (geen `PRJ:` / `SYS:`). Stel die niet voor.
+> Groeiwijze.nl gebruikt alleen `GEN:` placeholders met bestaande velden. Er is geen project- of systeemscope (geen `PRJ:` / `SYS:`). Stel die niet voor.
 
 #### 2.2 Template-structuur
 
@@ -224,7 +224,7 @@ De prompt is klaar wanneer:
 | Vage instructies ("verbeter de prompt") | Concrete stappen ("Lees TARGET_FILE, evalueer tegen A1-D4") |
 | Aannames over gebruikersvoorkeuren | STOP en vraag |
 | Projectregels herhalen in de prompt | Verwijs naar `.claude/rules/` of `.claude/skills/` |
-| `PRJ:` of `SYS:` placeholders voorstellen | Alleen `GEN:{{...}}` — andere scopes bestaan niet in dit project |
+| `PRJ:` of `SYS:` placeholders voorstellen | Alleen `GEN:` met bestaande velden — andere scopes bestaan niet in dit project |
 | Build-stappen, bundlers of frameworks aandragen | Project is statische HTML/CSS/JS + PHP form handler |
 | Losse hex-waarden in voorbeeldcode | Verwijs naar `rules/colors.md` tokens |
 | Urgentie-taal of agressieve CTA's in voorbeelden | Volg `rules/content.md` — warm, nuchter, niet-medisch |

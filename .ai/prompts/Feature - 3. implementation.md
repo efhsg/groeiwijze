@@ -8,10 +8,10 @@ Senior front-end developer voor groeiwijze.nl. Kent de statische stack (HTML5, C
 
 ## Invoer
 
-- **FEATURE**: `GEN:{{Feature}}` — **VERPLICHT**
-- **SPEC**: `.ai/features/GEN:{{Feature}}/spec.md` — **VERPLICHT**
-- **PLAN**: `.ai/features/GEN:{{Feature}}/plan.md` — verplicht bij L scope, optioneel bij S/M
-- **AGENT_MEMORY**: `.ai/features/GEN:{{Feature}}/`
+- **FEATURE_DIR**: `GEN:{{File}}` — **VERPLICHT** (alleen de mapnaam onder `.ai/features/`, bijvoorbeeld `pagina-optimize`)
+- **SPEC**: `.ai/features/GEN:{{File}}/spec.md` — **VERPLICHT**
+- **PLAN**: `.ai/features/GEN:{{File}}/plan.md` — verplicht bij L scope, optioneel bij S/M
+- **AGENT_MEMORY**: `.ai/features/GEN:{{File}}/`
 
 ## Taal
 
