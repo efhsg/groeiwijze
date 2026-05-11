@@ -41,3 +41,56 @@
     }
   });
 })();
+
+/* Dynamische terug-knop — schrijft href + tekst op basis van document.referrer.
+   HTML-fallback (bestaande href en tekst) blijft staan bij directe binnenkomst,
+   externe referrer, zelfde-pagina referrer, onbekend pad, of als de referrer
+   zelf ook een back-link pagina is (voorkomt ping-pong tussen leaf-pagina's). */
+(function () {
+  "use strict";
+
+  var backLinks = document.querySelectorAll("[data-back-link]");
+  if (!backLinks.length) return;
+
+  if (!document.referrer) return;
+
+  var referrerUrl;
+  try {
+    referrerUrl = new URL(document.referrer);
+  } catch (e) {
+    return;
+  }
+
+  if (referrerUrl.origin !== window.location.origin) return;
+  if (referrerUrl.pathname === window.location.pathname) return;
+
+  var backLinkPages = [
+    "/werkvormen.html",
+    "/veelgestelde-vragen.html",
+  ];
+  if (backLinkPages.indexOf(referrerUrl.pathname) !== -1) return;
+
+  var pageTitles = {
+    "/": "Home",
+    "/index.html": "Home",
+    "/is-dit-voor-jou.html": "Is dit voor jou?",
+    "/hoe-ik-werk.html": "Hoe ik werk",
+    "/werkvormen.html": "Werkvormen",
+    "/over-mij.html": "Over mij",
+    "/tarieven.html": "Tarieven",
+    "/contact.html": "Contact",
+    "/veelgestelde-vragen.html": "Veelgestelde vragen",
+    "/herstelroute.html": "Weg naar herstel",
+    "/visie.html": "Mijn visie",
+    "/verwijzers.html": "Voor verwijzers",
+    "/privacy.html": "Privacy",
+  };
+
+  var title = pageTitles[referrerUrl.pathname];
+  if (!title) return;
+
+  backLinks.forEach(function (link) {
+    link.href = referrerUrl.pathname + referrerUrl.search;
+    link.textContent = "Terug naar " + title;
+  });
+})();

@@ -921,6 +921,38 @@ h2 + .card-grid,
 }
 
 /* --------------------------------------------------------------------------
+   Back link — subtiele tekstlink voor terug-navigatie
+   -------------------------------------------------------------------------- */
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) 0;
+  font-size: var(--font-size-small);
+  color: var(--color-muted);
+  text-decoration: none;
+  font-weight: 400;
+  transition: color var(--transition-fast);
+}
+
+.back-link::before {
+  content: "\2190";
+  font-size: 1em;
+  line-height: 1;
+  transition: transform var(--transition-fast);
+}
+
+.back-link:hover {
+  color: var(--color-groen-dark);
+  text-decoration: underline;
+}
+
+.back-link:hover::before {
+  transform: translateX(-2px);
+}
+
+/* --------------------------------------------------------------------------
    Footer
    -------------------------------------------------------------------------- */
 
