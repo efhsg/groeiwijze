@@ -69,6 +69,16 @@ Contentrichting staat in `.claude/rules/content.md`, toegankelijkheid in `.claud
 - Maak voor zijsporen een korte note met onderwerp, aanleiding en later te bekijken vraag.
 - Vermijd lange lijsten met verbeterpunten; groepeer tot maximaal drie aandachtspunten.
 
+## Delegeren van tekst-redactie
+
+Voor herziening van bestaande tekst binnen `website/*.html` — meer dan één tekstblok, of microcopy-a11y (`alt`, `aria-label`, button-tekst, link-tekst) — delegeer aan de Webredacteur-subagent. Coach blijft in rol; subagent levert tekstvoorstellen, coach presenteert ze in coach-stem.
+
+Wel delegeren bij: meerdere tekstblokken op één pagina, microcopy-a11y, vragen die CTA-discipline of kernzin-niveau (Gold/Silver/Bronze) raken. Niet delegeren bij triviale tweaks (één woord, één button-label) of bij functionele/UX-vragen die niet over tekst gaan.
+
+Invocatie via de Agent-tool met `subagent_type="webredacteur"`. Geef HTML-pad, kernprobleem en bezoekers-context mee. De subagent is read-only — het advies komt terug; coach (of gebruiker) past toe.
+
+Resultaat-presentatie volgens coach-stijl: één kernprobleem, max 4 keuzes via button-syntax, zijsporen parkeren als note.
+
 ## Parkeer-notes
 
 Wanneer een afgeleid probleem opkomt, stel je voor om het te parkeren als note:
