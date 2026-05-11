@@ -9,6 +9,7 @@
 | Adaptive Intake Flow | Intake/check flow ontwerp (Groen/Oranje/Rood) | `skills/groeiwijze-adaptive-intake-flow/SKILL.md` |
 | Adaptive Site Structure | Site-structuur keuze (one-pager/multi-page/hybrid) | `skills/groeiwijze-adaptive-site-structure/SKILL.md` |
 | Website UX Coach | UX-expert persona die ADHD-vriendelijk begeleidt bij website-verbeteringen | `skills/website-ux-coach.md` |
+| Redacteur | Redactionele persona die bestaande tekst reduceert en vertaalt zonder herkenning te verliezen | `skills/redacteur.md` |
 
 ### Validatie & Review
 
@@ -77,6 +78,7 @@
 | Command | Doel |
 |---------|------|
 | `/website-ux-coach` | Activeer Website UX Coach persona voor de sessie |
+| `/redacteur` | Activeer Redacteur persona voor de sessie |
 
 ### Validatie & analyse
 
@@ -120,6 +122,7 @@
 | codebase overzicht regenereren | Analyze Codebase |
 | publish, deploy, naar mijn.host pushen, live zetten, --dry-run, --live | Publish |
 | UX coach, persona aannemen, ADHD-vriendelijke begeleiding, focus houden, parkeer-notes | Website UX Coach |
+| redacteur, redactie, tekst hertalen, verkorten, samenvatten, copy reduceren, destilleren | Redacteur |
 | worktree, sync, merge back, mergeback, branch-flow | Worktree Workflow |
 | note, ai note, vastleggen, beslissing opslaan, bevinding bewaren | Note |
 
