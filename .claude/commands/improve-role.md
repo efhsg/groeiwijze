@@ -1,6 +1,7 @@
 ---
 allowed-tools: Read, Glob, Grep, Edit
 description: Analyseer en verbeter een rolbestand in .ai/prompts/roles/
+label: Rol verbeteren
 ---
 
 # Improve Role

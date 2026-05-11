@@ -1,6 +1,7 @@
 ---
 allowed-tools: Bash(git diff:*), Bash(git status:*), Bash(grep:*), Read, Grep
 description: Snelle pre-flight check op gestaged bestanden tegen projectstandaarden
+label: Standaarden checken
 ---
 
 # Check Standards

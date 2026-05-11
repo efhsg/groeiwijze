@@ -1,6 +1,7 @@
 ---
 allowed-tools: Read, Bash
 description: Schrijf een AI Note in het lopende PromptManager-project via de runner-wrapper
+label: AI Note schrijven
 ---
 
 # Note

@@ -1,6 +1,7 @@
 ---
 allowed-tools: Bash, Read
-description: Commit staged changes en push naar origin
+description: Commit staged wijzigingen en push naar origin
+label: Commit en push
 ---
 
 # Commit and Push

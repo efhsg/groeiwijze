@@ -1,6 +1,7 @@
 ---
 allowed-tools: Read, Edit, Glob, Grep
 description: Optimaliseer een Claude skill — modes: interactive (default), auto, all
+label: Skill optimaliseren
 ---
 
 # Optimize Skill

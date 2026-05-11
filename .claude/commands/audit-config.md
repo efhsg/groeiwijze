@@ -1,6 +1,7 @@
 ---
 allowed-tools: Bash(find:*), Bash(ls:*), Bash(cat:*), Bash(grep:*), Bash(rg:*), Read, Grep, Glob
 description: Audit alle Claude-configuratiebestanden op volledigheid, correctheid en consistentie
+label: Config auditen
 ---
 
 # Configuration Audit

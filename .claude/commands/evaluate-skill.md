@@ -1,6 +1,7 @@
 ---
 allowed-tools: Read, Glob, Grep
 description: Semantische evaluatie van een Claude skill — advies-rapport over alignment met doel (read-only)
+label: Skill evalueren
 ---
 
 # Evaluate Skill

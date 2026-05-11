@@ -1,6 +1,7 @@
 ---
 allowed-tools: Read, Grep, Glob
-description: Critically assess an external code review against the actual codebase
+description: Beoordeel een externe code review kritisch tegen de daadwerkelijke codebase en projectregels
+label: Review triagen
 ---
 
 # Triage Review

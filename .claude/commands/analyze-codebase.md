@@ -1,6 +1,7 @@
 ---
 allowed-tools: Bash(find:*), Bash(ls:*), Bash(wc:*), Bash(grep:*), Bash(head:*), Bash(cat:*), Bash(xargs:*), Bash(basename:*), Read, Glob, Write, Edit
 description: Genereer of update .claude/codebase_analysis.md met overzicht van projectstructuur
+label: Codebase analyseren
 ---
 
 # Codebase Analysis

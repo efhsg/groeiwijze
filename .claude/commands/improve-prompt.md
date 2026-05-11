@@ -1,6 +1,7 @@
 ---
 allowed-tools: Read, Glob, Grep
 description: Analyseer en verbeter een prompt-bestand in .ai/prompts/
+label: Prompt verbeteren
 ---
 
 # Improve Prompt

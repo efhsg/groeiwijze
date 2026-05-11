@@ -1,6 +1,7 @@
 ---
 allowed-tools: Bash, Read, Grep, Glob
-description: Structured review van wijzigingen — modes: autonomous (default), interactive
+description: Gestructureerde review van wijzigingen — modes: autonomous (default), interactive
+label: Wijzigingen reviewen
 ---
 
 # Review Changes

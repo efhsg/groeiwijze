@@ -1,6 +1,7 @@
 ---
 allowed-tools: Read
-description: Snelle start — project overview, key files, en beschikbare commands
+description: Snelle start — projectoverzicht, key files en beschikbare commands voor groeiwijze.nl
+label: Onboarding
 ---
 
 # Onboarding

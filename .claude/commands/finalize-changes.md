@@ -1,6 +1,7 @@
 ---
 allowed-tools: Bash, Read, Grep, Glob
-description: Review checklist doorlopen en commitbericht voorstellen
+description: Doorloop de review checklist en stel een commitbericht voor — commit pas na expliciete bevestiging
+label: Wijzigingen afronden
 ---
 
 # Finalize Changes

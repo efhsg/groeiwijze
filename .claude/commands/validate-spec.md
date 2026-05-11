@@ -1,6 +1,7 @@
 ---
 allowed-tools: Read, Glob
 description: Lichtgewicht handmatige validatie van een feature-spec
+label: Spec valideren
 ---
 
 # Validate Spec

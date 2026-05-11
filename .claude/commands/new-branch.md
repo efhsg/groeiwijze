@@ -1,6 +1,7 @@
 ---
 allowed-tools: Bash
 description: Maak een nieuwe feature- of fix-branch aan volgens projectconventies
+label: Nieuwe branch
 ---
 
 # New Branch

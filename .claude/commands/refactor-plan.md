@@ -1,6 +1,7 @@
 ---
 allowed-tools: Read, Grep, Glob, Write, Edit
 description: Analyseer de website en maak een refactoringplan voor CSS/HTML/JS opschoning
+label: Refactorplan opstellen
 ---
 
 # Refactor Plan
