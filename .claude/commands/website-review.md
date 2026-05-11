@@ -1,6 +1,6 @@
 ---
 allowed-tools: Read, Bash, Grep, Glob
-description: Uitgebreide UI/UX- en toegankelijkheidsreview van de website vanuit healthcare-perspectief
+description: UI/UX- en toegankelijkheidsreview van de site vanuit het perspectief van stress-sensitieve bezoekers
 label: Website reviewen
 ---
 

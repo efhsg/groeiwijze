@@ -1,6 +1,6 @@
 ---
 allowed-tools: Bash, Read
-description: Publiceer groeiwijze.nl naar mijn.host via het AI-runner contract
+description: Publiceer groeiwijze.nl naar mijn.host — voorbeeld eerst, bevestiging vóór de echte publicatie
 label: Site publiceren
 ---
 
