@@ -46,6 +46,7 @@
 | Onboarding | Snelle start — project overview, key files, commands | `skills/onboarding.md` |
 | Custom Buttons | Slash-syntax en bracket-syntax voor klikbare keuzes | `skills/custom-buttons.md` |
 | Worktree Workflow | Hoe agents zich gedragen in PromptManager's gebruiker-gestuurde worktree-flow | `skills/worktree-workflow.md` |
+| Note | Schrijf een AI Note in het PromptManager-project via de runner-wrapper | `skills/note.md` |
 
 ## Beschikbare commands (slash)
 
@@ -63,6 +64,7 @@
 | `/refactor` | Structurele code-verbeteringen |
 | `/refactor-plan` | Plan een refactor (analyse zonder wijzigingen) |
 | `/onboarding` | Project quick start |
+| `/note` | Schrijf een AI Note via de runner-wrapper |
 
 ### Deployment
 
@@ -119,6 +121,7 @@
 | publish, deploy, naar mijn.host pushen, live zetten, --dry-run, --live | Publish |
 | UX coach, persona aannemen, ADHD-vriendelijke begeleiding, focus houden, parkeer-notes | Website UX Coach |
 | worktree, sync, merge back, mergeback, branch-flow | Worktree Workflow |
+| note, ai note, vastleggen, beslissing opslaan, bevinding bewaren | Note |
 
 ## Bestandspatroon routing
 
