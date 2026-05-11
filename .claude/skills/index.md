@@ -10,6 +10,7 @@
 | Adaptive Site Structure | Site-structuur keuze (one-pager/multi-page/hybrid) | `skills/groeiwijze-adaptive-site-structure/SKILL.md` |
 | Website UX Coach | UX-expert persona die ADHD-vriendelijk begeleidt bij website-verbeteringen | `skills/website-ux-coach.md` |
 | Redacteur | Redactionele persona die bestaande tekst reduceert en vertaalt zonder herkenning te verliezen | `skills/redacteur.md` |
+| Webredacteur | Website-specifieke redacteur voor HTML-copy met harde checks op CTA, microcopy-a11y en markup-context | `skills/webredacteur.md` |
 
 ### Validatie & Review
 
@@ -79,6 +80,7 @@
 |---------|------|
 | `/website-ux-coach` | Activeer Website UX Coach persona voor de sessie |
 | `/redacteur` | Activeer Redacteur persona voor de sessie |
+| `/webredacteur` | Activeer Webredacteur persona voor de sessie |
 
 ### Validatie & analyse
 
@@ -123,6 +125,7 @@
 | publish, deploy, naar mijn.host pushen, live zetten, --dry-run, --live | Publish |
 | UX coach, persona aannemen, ADHD-vriendelijke begeleiding, focus houden, parkeer-notes | Website UX Coach |
 | redacteur, redactie, tekst hertalen, verkorten, samenvatten, copy reduceren, destilleren | Redacteur |
+| webredacteur, web-copy, button-tekst, link-tekst, alt-tekst, CTA-tekst, microcopy, pagina-copy | Webredacteur |
 | worktree, sync, merge back, mergeback, branch-flow | Worktree Workflow |
 | note, ai note, vastleggen, beslissing opslaan, bevinding bewaren | Note |
 
