@@ -70,6 +70,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 9rem;
 }
 
 body {
@@ -317,27 +318,22 @@ p {
   }
 
   .logo__tagline {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     line-height: 1.1;
   }
 }
 
-/* Mobile portrait (≤480px) */
+/* Mobile portrait (≤480px) — icoon alleen, tagline verbergen */
 @media (max-width: 480px) {
   .logo {
     --logo-size: 68px;
     --logo-nudge-y: 0px;
 
-    --tagline-pull-left: 6px;
-    --tagline-nudge-x: 0px;
-    --tagline-nudge-y: 9px;
-
     gap: 0;
   }
 
   .logo__tagline {
-    font-size: 0.58rem;
-    line-height: 1.1;
+    display: none;
   }
 }
 
@@ -426,7 +422,7 @@ p {
     position: fixed;
     inset: 0;
     background: rgba(62, 68, 68, 0.08);
-    z-index: 150;
+    z-index: 50;
   }
 
   .header__inner {
@@ -464,8 +460,12 @@ p {
     display: flex;
   }
 
-  /* Links: tighter spacing */
+  /* Links: 44px touch-target, hele paneelregel tapbaar */
   .nav__link {
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    min-height: 44px;
     padding: 8px 4px;
   }
 

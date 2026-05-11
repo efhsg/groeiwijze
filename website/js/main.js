@@ -5,33 +5,39 @@
 (function () {
   "use strict";
 
-  // Mobile navigation toggle
   const navToggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector(".nav");
 
-  if (navToggle && nav) {
-    navToggle.addEventListener("click", function () {
-      const isOpen = nav.classList.toggle("nav--open");
-      navToggle.classList.toggle("nav-toggle--active");
-      navToggle.setAttribute("aria-expanded", isOpen);
-    });
+  if (!navToggle || !nav) return;
 
-    // Close menu when clicking a link
-    nav.querySelectorAll(".nav__link").forEach(function (link) {
-      link.addEventListener("click", function () {
-        nav.classList.remove("nav--open");
-        navToggle.classList.remove("nav-toggle--active");
-        navToggle.setAttribute("aria-expanded", "false");
-      });
-    });
+  function closeNav() {
+    nav.classList.remove("nav--open");
+    document.body.classList.remove("nav-open");
+    navToggle.classList.remove("nav-toggle--active");
+    navToggle.setAttribute("aria-expanded", "false");
   }
 
-  // Close menu when clicking outside
+  navToggle.addEventListener("click", function () {
+    const isOpen = nav.classList.toggle("nav--open");
+    document.body.classList.toggle("nav-open", isOpen);
+    navToggle.classList.toggle("nav-toggle--active", isOpen);
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  nav.querySelectorAll(".nav__link").forEach(function (link) {
+    link.addEventListener("click", closeNav);
+  });
+
   document.addEventListener("click", function (e) {
-    if (nav && navToggle && !nav.contains(e.target) && !navToggle.contains(e.target)) {
-      nav.classList.remove("nav--open");
-      navToggle.classList.remove("nav-toggle--active");
-      navToggle.setAttribute("aria-expanded", "false");
+    if (!nav.contains(e.target) && !navToggle.contains(e.target)) {
+      closeNav();
+    }
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && nav.classList.contains("nav--open")) {
+      closeNav();
+      navToggle.focus();
     }
   });
 })();
