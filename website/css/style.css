@@ -860,64 +860,13 @@ h2 + .card-grid,
 }
 
 /* --------------------------------------------------------------------------
-   Read More (details/summary)
+   Read More — inline tekstlink ("lees meer"-affordance)
    -------------------------------------------------------------------------- */
 
 .read-more {
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  padding: var(--space-lg);
-}
-
-.read-more__toggle {
-  cursor: pointer;
-  list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-sm);
-}
-
-/* Remove default marker in all browsers */
-.read-more__toggle::-webkit-details-marker {
-  display: none;
-}
-
-.read-more__toggle::marker {
-  content: "";
-}
-
-.read-more__title {
-  margin-bottom: 0;
-}
-
-/* Chevron indicator */
-.read-more__toggle::after {
-  content: "";
-  display: block;
-  width: 10px;
-  height: 10px;
-  flex-shrink: 0;
-  border-right: 2px solid var(--color-muted);
-  border-bottom: 2px solid var(--color-muted);
-  transform: rotate(45deg);
-  transition: transform var(--transition-fast);
-}
-
-.read-more[open] > .read-more__toggle::after {
-  transform: rotate(-135deg);
-}
-
-.read-more__content {
-  margin-top: var(--space-md);
-}
-
-.read-more__content ul {
-  padding-left: var(--space-md);
-}
-
-.read-more__content li {
-  margin-bottom: var(--space-xs);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 /* --------------------------------------------------------------------------
